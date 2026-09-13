@@ -18,11 +18,12 @@ gates remain in [release readiness](RELEASE_READINESS.md).
    ssh <admin-user>@<device-ip>
    ```
 
-3. Follow [Download, verify and install](#download-verify-and-install) below.
-   It uses the pinned
+3. Follow [Clone and install](#clone-and-install) below.
+   It selects the
    [v0.5.17-dev release](https://github.com/gall-levi-code/TinyPiRelay/releases/tag/v0.5.17-dev)
-   rather than a moving branch or `latest` URL. For a transferred archive, use
-   the [manual/offline alternative](#manualoffline-alternative).
+   rather than a moving branch or `latest` URL. The
+   [download-and-verify](#download-verify-and-install) and
+   [manual/offline](#manualoffline-alternative) methods remain available.
 4. Open `http://<hostname>.local/` or `http://<device-ip>/`. Create a username
    and password, confirm the password, then sign in normally. Passwords require
    at least 12 characters. No default account, setup code or SSH password reuse.
@@ -41,6 +42,39 @@ workflow; resolve them and rerun the same artifact.
 A read-only `plan` never installs packages or refreshes system APT indexes.
 Stale indexes can therefore make a plan fail before the applying launcher
 refreshes them and performs its own full preflight.
+
+### Clone and install
+
+On the Pi's SSH terminal, run this from a writable directory without an existing
+`TinyPiRelay` folder. The [README](../README.md#quick-install) provides the same
+command on one line. It requires the OS administrator's `sudo` access; if already
+root, omit `sudo`.
+
+```sh
+sudo apt-get update && \
+sudo apt-get install -y --no-remove --no-upgrade git ca-certificates && \
+git clone --depth 1 --branch v0.5.17-dev https://github.com/gall-levi-code/TinyPiRelay.git && \
+sudo /bin/sh TinyPiRelay/install.sh install --apply
+```
+
+Git and CA certificates are installed if missing; their existing versions are
+not upgraded by this command. The source installer handles the remaining
+application prerequisites and services. No compilation or release-builder step
+is needed. Download/package failures stop the chain. A nonempty destination is
+not overwritten; use another parent directory instead of deleting an existing
+checkout. A detached-HEAD notice is normal when checking out a release tag.
+
+Review and trust the repository before running its installer as root. To inspect
+first, run only through the clone step, review `TinyPiRelay/install.sh` and its
+source, then run `/bin/sh TinyPiRelay/install.sh plan` before applying. This
+method relies on HTTPS and the selected Git tag, not an independent signature.
+The published `v0.5.17-dev` tag currently resolves to commit
+`215787dd96e0c551522c4ef0fb7320bcb770ea5c`; inspect the checkout with
+`git -C TinyPiRelay rev-parse HEAD` if needed.
+
+The installed services use their staged `/opt/tinypirelay` release, not the
+working checkout. For later versions use the explicit upgrade procedure below;
+do not treat `git pull` as an appliance upgrade.
 
 ### Download, verify and install
 

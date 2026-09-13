@@ -12,11 +12,11 @@ installation, use the [upgrade guide](docs/INSTALLATION.md#existing-installation
    is required.
 2. Connect using `ssh <admin-user>@<hostname>.local` (or the Pi's IP address).
 3. Paste the following **into the Pi's SSH terminal**, not Windows PowerShell.
-   This single command downloads and runs the hosted installer, which installs
-   TinyPiRelay's prerequisites, configures the services and starts the web GUI:
+   This single command ensures Git and HTTPS certificates are installed, clones
+   the selected release, and runs its installer to set up the tooling and services:
 
    ```sh
-   tpr_setup=$(curl --disable -fsSL --proto '=https' --proto-redir '=https' https://github.com/gall-levi-code/TinyPiRelay/releases/download/v0.5.17-dev/install-tinypirelay-0.5.17-dev.sh) && sudo /bin/sh -c "$tpr_setup"
+   sudo apt-get update && sudo apt-get install -y --no-remove --no-upgrade git ca-certificates && git clone --depth 1 --branch v0.5.17-dev https://github.com/gall-levi-code/TinyPiRelay.git && sudo /bin/sh TinyPiRelay/install.sh install --apply
    ```
 
 4. Open `http://<hostname>.local/` or `http://<device-ip>/` in your browser—no
@@ -24,16 +24,16 @@ installation, use the [upgrade guide](docs/INSTALLATION.md#existing-installation
    characters), then sign in. Attach audio later and use **Audio → Refresh audio
    inputs** to select a validated device/mode, save and restart media.
 
-Review the [installer and release notes](https://github.com/gall-levi-code/TinyPiRelay/releases/tag/v0.5.17-dev)
-before granting root access. The command downloads the complete script before
-running it and stops if the download fails. It trusts the installer served by
-this repository over HTTPS; the installer verifies its pinned application archive
-before extraction. For explicit installer-checksum verification, use the
-[download-and-verify procedure](docs/INSTALLATION.md#download-verify-and-install).
+Run it from a writable directory without an existing `TinyPiRelay` folder. A
+failed package operation or clone stops the command before installation; an
+existing checkout is not overwritten or automatically reused. The selected tag
+is a development release, not the changing `main` branch.
 
-The initial download needs `curl` and working CA certificates; if either is
-missing, the linked procedure includes their setup. All remaining application
-prerequisites are handled by the installer. It may ask for your OS account's
+Review the [installer and release notes](https://github.com/gall-levi-code/TinyPiRelay/releases/tag/v0.5.17-dev)
+before granting root access. This method trusts the GitHub repository and tag
+over HTTPS; it does not verify a release signature. For manual review or
+checksum-verified archive installation, use the
+[full installation guide](docs/INSTALLATION.md). It may ask for your OS account's
 `sudo` password; TinyPiRelay's web account is created separately in the browser.
 
 Use a **trusted LAN**: HTTP passwords/sessions are unencrypted, and the first
