@@ -1,5 +1,59 @@
 # TinyPiRelay
 
+## Quick install
+
+The current installer is **0.5.17-dev**, a development prerelease. Fresh-device
+onboarding, port 80 and mDNS still need physical-Pi validation. For an existing
+installation, use the [upgrade guide](docs/INSTALLATION.md#existing-installations-upgrades-and-rollback).
+
+1. Flash **Raspberry Pi OS Bookworm or Trixie**. For the current Pi 4 evaluation
+   target, use Trixie 64-bit. In Imager, configure a unique hostname, networking,
+   an OS administrator and SSH. No microphone or TinyPiRelay configuration file
+   is required.
+2. Connect using `ssh <admin-user>@<hostname>.local` (or the Pi's IP address).
+3. Paste the following **into the Pi's SSH terminal**, not Windows PowerShell.
+   It installs missing download tools, downloads the pinned GitHub installer,
+   checks its SHA-256, then installs TinyPiRelay and its prerequisites:
+
+   ```sh
+   (
+       set -eu
+       PATH=/usr/sbin:/usr/bin:/sbin:/bin
+       export PATH
+       tpr_sudo=sudo
+       [ "$(id -u)" -ne 0 ] || tpr_sudo=
+       if ! command -v curl >/dev/null 2>&1 || [ ! -s /etc/ssl/certs/ca-certificates.crt ]; then
+           $tpr_sudo apt-get -o APT::Update::Error-Mode=any -o Acquire::Retries=2 \
+               -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
+           $tpr_sudo apt-get --yes --no-remove --no-upgrade --no-install-recommends install curl ca-certificates
+       fi
+       umask 077
+       tpr_download_dir=$(mktemp -d /tmp/tinypirelay-download.XXXXXX)
+       cd "$tpr_download_dir"
+       curl --disable --fail --silent --show-error --location \
+           --proto '=https' --proto-redir '=https' --connect-timeout 20 --max-time 300 \
+           --max-filesize 1048576 --output install-tinypirelay-0.5.17-dev.sh \
+           https://github.com/gall-levi-code/TinyPiRelay/releases/download/v0.5.17-dev/install-tinypirelay-0.5.17-dev.sh
+       printf '%s  %s\n' 'cf46521af88aad8d9496185b89ffc9e91d97ccdc896edfdfa38955e3f2001fb7' 'install-tinypirelay-0.5.17-dev.sh' | sha256sum --check --status
+       $tpr_sudo /bin/sh ./install-tinypirelay-0.5.17-dev.sh
+   )
+   ```
+
+4. Open `http://<hostname>.local/` or `http://<device-ip>/` in your browser—no
+   special port needed. Create your web username and password (at least 12
+   characters), then sign in. Attach audio later and use **Audio → Refresh audio
+   inputs** to select a validated device/mode, save and restart media.
+
+Review the [installer and release notes](https://github.com/gall-levi-code/TinyPiRelay/releases/tag/v0.5.17-dev)
+before granting root access. The command stops on download/checksum errors; the
+launcher also verifies its source archive before extraction. Checksums rely on
+trust in this repository and HTTPS, not an independent publisher signature.
+
+Use a **trusted LAN**: HTTP passwords/sessions are unencrypted, and the first
+person reaching an unconfigured device can create its administrator account.
+For SSH-only access, manual downloads, upgrades and recovery, see the
+[full installation guide](docs/INSTALLATION.md).
+
 ## Current status — 2026-09-13
 
 Development prerelease **0.5.17-dev** revamps [installation](docs/INSTALLATION.md):
@@ -129,18 +183,9 @@ deployment exercised 409 tests without an application-test failure, although a
 corrected second command was required for six initially missing test-module
 imports; that result is retained in the dashboard deployment report.
 
-## Install the development prerelease
+## Installation details
 
-Use the [fresh-install guide](docs/INSTALLATION.md#fresh-installation) on Raspberry
-Pi OS Bookworm or Trixie. Download the
-[0.5.17-dev installer](https://github.com/gall-levi-code/TinyPiRelay/releases/download/v0.5.17-dev/install-tinypirelay-0.5.17-dev.sh),
-verify/review it, then run it with `sudo /bin/sh`. It installs prerequisites and
-starts the GUI at `http://<hostname>.local/` or `http://<device-ip>/`; create your
-web account there. No microphone or prepared configuration is needed.
-
-This is a **development prerelease**, not a general release. Fresh-device
-onboarding, port 80 and mDNS still need physical-Pi validation. Existing devices
-should follow the [upgrade instructions](docs/INSTALLATION.md#existing-installations-upgrades-and-rollback).
+Start with [Quick install](#quick-install) above for a fresh device.
 
 The reviewable installer, service policies, lifecycle commands, and bootstrap
 mechanism are documented in
