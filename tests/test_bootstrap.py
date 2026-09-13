@@ -176,6 +176,26 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(0, completed.returncode, completed.stderr)
         self.assertEqual(["install", "--apply"], completed.stdout.splitlines())
 
+    def test_readme_one_line_download_runs_only_after_success(self) -> None:
+        commands = [line.strip() for line in (ROOT / "README.md").read_text().splitlines()
+                    if line.startswith("   tpr_setup=")]
+        self.assertEqual(1, len(commands))
+        self.assertIn("--proto '=https' --proto-redir '=https'", commands[0])
+        for download_status in (0, 22):
+            with self.subTest(download_status=download_status):
+                # Failed curl deliberately emits executable-looking partial data.
+                # Shell functions isolate both the network and privilege boundary.
+                wrapper = (
+                    "curl() { printf 'echo installer-fixture-ran'; return "
+                    + str(download_status) + "; }\n"
+                    'sudo() { "$@"; }\n' + commands[0]
+                )
+                completed = subprocess.run(("/bin/sh", "-c", wrapper), text=True,
+                                           capture_output=True, timeout=10, check=False)
+                self.assertEqual(download_status, completed.returncode, completed.stderr)
+                self.assertEqual("installer-fixture-ran\n" if download_status == 0 else "",
+                                 completed.stdout)
+
     def test_installer_metadata_refresh_is_apply_only_and_not_uninstall(self) -> None:
         script = (ROOT / "install.sh").read_text(encoding="utf-8")
         preparation = "applying=no\n" + script.split("applying=no\n", 1)[1].split("\nPYTHONPATH=", 1)[0]

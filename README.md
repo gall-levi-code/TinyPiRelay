@@ -12,31 +12,11 @@ installation, use the [upgrade guide](docs/INSTALLATION.md#existing-installation
    is required.
 2. Connect using `ssh <admin-user>@<hostname>.local` (or the Pi's IP address).
 3. Paste the following **into the Pi's SSH terminal**, not Windows PowerShell.
-   It installs missing download tools, downloads the pinned GitHub installer,
-   checks its SHA-256, then installs TinyPiRelay and its prerequisites:
+   This single command downloads and runs the hosted installer, which installs
+   TinyPiRelay's prerequisites, configures the services and starts the web GUI:
 
    ```sh
-   (
-       set -eu
-       PATH=/usr/sbin:/usr/bin:/sbin:/bin
-       export PATH
-       tpr_sudo=sudo
-       [ "$(id -u)" -ne 0 ] || tpr_sudo=
-       if ! command -v curl >/dev/null 2>&1 || [ ! -s /etc/ssl/certs/ca-certificates.crt ]; then
-           $tpr_sudo apt-get -o APT::Update::Error-Mode=any -o Acquire::Retries=2 \
-               -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
-           $tpr_sudo apt-get --yes --no-remove --no-upgrade --no-install-recommends install curl ca-certificates
-       fi
-       umask 077
-       tpr_download_dir=$(mktemp -d /tmp/tinypirelay-download.XXXXXX)
-       cd "$tpr_download_dir"
-       curl --disable --fail --silent --show-error --location \
-           --proto '=https' --proto-redir '=https' --connect-timeout 20 --max-time 300 \
-           --max-filesize 1048576 --output install-tinypirelay-0.5.17-dev.sh \
-           https://github.com/gall-levi-code/TinyPiRelay/releases/download/v0.5.17-dev/install-tinypirelay-0.5.17-dev.sh
-       printf '%s  %s\n' 'cf46521af88aad8d9496185b89ffc9e91d97ccdc896edfdfa38955e3f2001fb7' 'install-tinypirelay-0.5.17-dev.sh' | sha256sum --check --status
-       $tpr_sudo /bin/sh ./install-tinypirelay-0.5.17-dev.sh
-   )
+   tpr_setup=$(curl --disable -fsSL --proto '=https' --proto-redir '=https' https://github.com/gall-levi-code/TinyPiRelay/releases/download/v0.5.17-dev/install-tinypirelay-0.5.17-dev.sh) && sudo /bin/sh -c "$tpr_setup"
    ```
 
 4. Open `http://<hostname>.local/` or `http://<device-ip>/` in your browser—no
@@ -45,9 +25,16 @@ installation, use the [upgrade guide](docs/INSTALLATION.md#existing-installation
    inputs** to select a validated device/mode, save and restart media.
 
 Review the [installer and release notes](https://github.com/gall-levi-code/TinyPiRelay/releases/tag/v0.5.17-dev)
-before granting root access. The command stops on download/checksum errors; the
-launcher also verifies its source archive before extraction. Checksums rely on
-trust in this repository and HTTPS, not an independent publisher signature.
+before granting root access. The command downloads the complete script before
+running it and stops if the download fails. It trusts the installer served by
+this repository over HTTPS; the installer verifies its pinned application archive
+before extraction. For explicit installer-checksum verification, use the
+[download-and-verify procedure](docs/INSTALLATION.md#download-verify-and-install).
+
+The initial download needs `curl` and working CA certificates; if either is
+missing, the linked procedure includes their setup. All remaining application
+prerequisites are handled by the installer. It may ask for your OS account's
+`sudo` password; TinyPiRelay's web account is created separately in the browser.
 
 Use a **trusted LAN**: HTTP passwords/sessions are unencrypted, and the first
 person reaching an unconfigured device can create its administrator account.
