@@ -32,6 +32,9 @@ gates remain in [release readiness](RELEASE_READINESS.md).
    confirmed media-restart action to apply it. Detecting an unknown microphone
    does not approve its modes or streaming conversions.
 
+Continue with [your first recording](GETTING_STARTED.md) for a screenshot-guided
+audio check, recording, playback and download walkthrough.
+
 The applying shell launcher refreshes APT metadata and can install missing Python
 on supported Raspberry Pi OS. The installer checks platform, storage and package
 plans before installing missing Python/PyGObject, ALSA and GStreamer dependencies,

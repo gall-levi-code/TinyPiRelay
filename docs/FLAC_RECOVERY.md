@@ -18,6 +18,11 @@ Progress and the final outcome appear in the file state; the result includes
 the copy's name. Once published, the copy supports the normal playback,
 download and delete controls.
 
+![TinyPiRelay confirmation explaining that recovery creates a separate copy and may leave gaps.](screenshots/recovery.png)
+
+*Actual confirmation dialog with simulated sample data, after stopping the
+preview recording. The prompt was cancelled; no recovery was run for this image.*
+
 This can help with interrupted finalization, truncated tails and damaged
 frames when enough metadata/audio remains decodable. It cannot reconstruct
 lost samples or guarantee the complete original recording. Corrupt frames
