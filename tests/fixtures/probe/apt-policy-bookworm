@@ -1,0 +1,41 @@
+python3:
+  Installed: 3.11.2-1+b1
+  Candidate: 3.11.2-1+b1
+  Version table:
+ *** 3.11.2-1+b1 500
+python3-gi:
+  Installed: 3.42.2-3+b1
+  Candidate: 3.42.2-3+b1
+gir1.2-gstreamer-1.0:
+  Installed: 1.22.0-2+deb12u1
+  Candidate: 1.22.0-2+deb12u1
+gir1.2-gst-plugins-base-1.0:
+  Installed: 1.22.0-3+deb12u5
+  Candidate: 1.22.0-3+deb12u5
+alsa-utils:
+  Installed: 1.2.8-1+rpt1
+  Candidate: 1.2.8-1+rpt1
+libgstreamer1.0-0:
+  Installed: 1.22.0-2+deb12u1
+  Candidate: 1.22.0-2+deb12u1
+gstreamer1.0-tools:
+  Installed: 1.22.0-2+deb12u1
+  Candidate: 1.22.0-2+deb12u1
+gstreamer1.0-alsa:
+  Installed: 1.22.0-3+deb12u5
+  Candidate: 1.22.0-3+deb12u5
+gstreamer1.0-plugins-base:
+  Installed: 1.22.0-3+deb12u5
+  Candidate: 1.22.0-3+deb12u5
+gstreamer1.0-plugins-good:
+  Installed: 1.22.0-5+deb12u3
+  Candidate: 1.22.0-5+deb12u3
+gstreamer1.0-plugins-bad:armhf:
+  Installed: (none)
+  Candidate: 1.22.0-4+deb12u6
+ffmpeg:
+  Installed: 1.0-fixture
+  Candidate: 1.0-fixture
+avahi-daemon:
+  Installed: 1.0-fixture
+  Candidate: 1.0-fixture

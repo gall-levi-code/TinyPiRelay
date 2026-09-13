@@ -1,0 +1,6 @@
+#!/bin/sh
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+export PATH
+
+PYTHONPATH=/opt/tinypirelay/current/src \
+    exec /usr/bin/python3 -P -B -m tinypirelay.cli "$@"

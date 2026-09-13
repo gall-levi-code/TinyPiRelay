@@ -1,0 +1,24 @@
+alsa:  alsasrc: Audio source (ALSA)
+audioconvert:  audioconvert: Audio converter
+audioresample:  audioresample: Audio resampler
+coreelements:  capsfilter: CapsFilter
+coreelements:  tee: Tee pipe fitting
+coreelements:  queue: Queue
+coreelements:  valve: Valve element
+level:  level: Level
+spectrum:  spectrum: Spectrum analyzer
+opus:  opusenc: Opus audio encoder
+flac:  flacenc: FLAC audio encoder
+srt:  srtsink: SRT network sink
+audiotestsrc:  audiotestsrc: Audio test source
+matroska:  matroskamux: Matroska muxer
+matroska:  matroskademux: Matroska demuxer
+srt:  srtsrc: SRT network source
+audioparsers:  flacparse: FLAC parser
+opusparse:  opusparse: Opus parser
+flac:  flacdec: FLAC audio decoder
+opus:  opusdec: Opus audio decoder
+coreelements:  fakesink: Fake Sink
+coreelements:  filesink: File Sink
+coreelements:  identity: Identity
+Total count: 132 plugins, 1301 features

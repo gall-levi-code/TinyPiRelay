@@ -1,0 +1,1572 @@
+{
+  "configuration": {
+    "bitrate_sequence_bps": [
+      128000,
+      64000,
+      192000
+    ],
+    "capture_evidence": "physical_alsa",
+    "capture_mode": {
+      "channels": 1,
+      "format": "S16LE",
+      "rate_hz": 48000
+    },
+    "connection_attempt_timeout_seconds": 5.0,
+    "device_id": "hw:CARD=iMM6C,DEV=0",
+    "encryption": "disabled_for_loopback_evidence",
+    "latency_ms": 200,
+    "listener_port": 9113,
+    "loopback_host": "127.0.0.1",
+    "min_buffer_delta": 25,
+    "minimum_duration_seconds": 35.0,
+    "recording_directory": "../alsa-recordings",
+    "recording_directory_temporary": false,
+    "source_factory": "alsasrc",
+    "storage_poll_seconds": 5.0,
+    "timeout_seconds": 140.0
+  },
+  "duration_seconds": 45.782,
+  "ended_at_utc": "2026-08-18T19:03:37Z",
+  "engine_event_counts": {
+    "branch-added:recording": 3,
+    "branch-added:stream": 3,
+    "branch-created:recording": 4,
+    "branch-created:stream": 3,
+    "branch-removed:level": 1,
+    "branch-removed:recording": 4,
+    "branch-removed:spectrum": 1,
+    "branch-removed:stream": 3,
+    "capture-started:capture": 1,
+    "capture-stopped:capture": 2,
+    "connection:stream": 2,
+    "opus-bitrate-changed:stream": 2,
+    "recording-rotated:recording": 1,
+    "shutdown-complete:capture": 1,
+    "telemetry:level": 216,
+    "telemetry:spectrum": 214
+  },
+  "fatal_errors": [],
+  "final_snapshot": {
+    "runtime_error": null,
+    "state": {
+      "capture": {
+        "config_revision": null,
+        "generation": 1,
+        "last_error": null,
+        "state": "stopped"
+      },
+      "connection": {
+        "consecutive_failures": 0,
+        "last_error": {
+          "code": "srt_gstreamer_error_10",
+          "message": "gst-resource-error-quark: Failed to write to SRT socket: Error on SRT socket: Connection timeout (16) (10)"
+        },
+        "next_retry_seconds": null,
+        "reconnect_count": 2,
+        "state": "disconnected",
+        "statistics": {
+          "bandwidth-mbps": 11.916,
+          "bytes-sent-total": 16031,
+          "packets-retransmitted": 0,
+          "packets-sent-lost": 0,
+          "rtt-ms": 3.004,
+          "send-duration-us": 875168,
+          "send-rate-mbps": 0.13080463741348441
+        }
+      },
+      "monitoring": {
+        "last_error": null
+      },
+      "recording": {
+        "config_revision": null,
+        "current_file": null,
+        "generation": 3,
+        "last_error": null,
+        "last_finalized_file": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac",
+        "rotation_pending": false,
+        "state": "stopped",
+        "stop_target": null,
+        "warning": null
+      },
+      "schema_version": 1,
+      "service": "stopped",
+      "stream": {
+        "config_revision": null,
+        "generation": 1,
+        "last_error": null,
+        "opus_bitrate_bps": null,
+        "pending_opus_bitrate_bps": null,
+        "representation_id": null,
+        "state": "stopped"
+      }
+    },
+    "telemetry": {
+      "meter": {
+        "channels": [
+          {
+            "clipping": false,
+            "no_signal": false,
+            "peak_dbfs": -43.53986882710227,
+            "rms_dbfs": -52.26638756727711
+          }
+        ],
+        "sequence": 256
+      },
+      "spectrum": {
+        "magnitudes_db": [
+          -63.75090026855469,
+          -69.72225952148438,
+          -87.443603515625,
+          -89.86396789550781,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0,
+          -90.0
+        ],
+        "sequence": 254
+      }
+    }
+  },
+  "platform": {
+    "hostname": "TinyPiRelay",
+    "machine": "armv6l",
+    "python": "3.13.5",
+    "release": "6.18.34+rpt-rpi-v6",
+    "system": "Linux"
+  },
+  "production_component": false,
+  "receiver": {
+    "buffers": {
+      "buffer_count": 1430,
+      "last_pts_ns": 43003500000,
+      "missing_pts": 0,
+      "non_monotonic_pts": 0
+    },
+    "bus_errors": [],
+    "construction": "Gst.parse_launch disposable integration listener only",
+    "pipeline": "srtsrc uri=\"srt://:9113?mode=listener&latency=200\" ! matroskademux ! queue ! opusparse ! opusdec ! identity name=receiver_counter signal-handoffs=true silent=true ! fakesink sync=false",
+    "production_component": false
+  },
+  "recording_output": {
+    "cleanup_policy": "retained",
+    "directory": "../alsa-recordings",
+    "explicit_directory": true,
+    "retained_after_run": true
+  },
+  "result": {
+    "checks": {
+      "capture_opus_connected": true,
+      "concurrent_srt_stats_and_queue_contracts": true,
+      "flac_rotation_stop_and_decode": true,
+      "no_unexpected_engine_or_receiver_errors": true,
+      "ordered_shutdown": true,
+      "receiver_reconnect_backoff": true,
+      "recording_output_retained": true,
+      "runtime_bitrate_readback_without_restart": true,
+      "simulated_storage_threshold_isolated": true,
+      "unconsumed_telemetry_and_queues_bounded": true,
+      "uninterrupted_phases_preserve_physical_stream": true
+    },
+    "reasons": [],
+    "status": "pass",
+    "threshold_evidence": "simulated_status_injection"
+  },
+  "scenario_errors": [],
+  "scenarios": {
+    "bitrate": {
+      "initial_bps": 128000,
+      "transitions": [
+        {
+          "capture_generation": 1,
+          "connection_state": "connected",
+          "continuity_after": {
+            "branch_created_stream_count": 1,
+            "connection_loss_events": 0,
+            "receiver": {
+              "buffer_count": 59,
+              "last_pts_ns": 1563500000,
+              "missing_pts": 0,
+              "non_monotonic_pts": 0
+            },
+            "reconnect_count": 0,
+            "stream_instance_tokens": [
+              3
+            ]
+          },
+          "continuity_before": {
+            "branch_created_stream_count": 1,
+            "connection_loss_events": 0,
+            "receiver": {
+              "buffer_count": 33,
+              "last_pts_ns": 1043500000,
+              "missing_pts": 0,
+              "non_monotonic_pts": 0
+            },
+            "reconnect_count": 0,
+            "stream_instance_tokens": [
+              3
+            ]
+          },
+          "readback_bps": 64000,
+          "receiver_buffer_delta": 26,
+          "requested_bps": 64000,
+          "stream_generation": 1,
+          "stream_state": "running"
+        },
+        {
+          "capture_generation": 1,
+          "connection_state": "connected",
+          "continuity_after": {
+            "branch_created_stream_count": 1,
+            "connection_loss_events": 0,
+            "receiver": {
+              "buffer_count": 84,
+              "last_pts_ns": 2063500000,
+              "missing_pts": 0,
+              "non_monotonic_pts": 0
+            },
+            "reconnect_count": 0,
+            "stream_instance_tokens": [
+              3
+            ]
+          },
+          "continuity_before": {
+            "branch_created_stream_count": 1,
+            "connection_loss_events": 0,
+            "receiver": {
+              "buffer_count": 59,
+              "last_pts_ns": 1563500000,
+              "missing_pts": 0,
+              "non_monotonic_pts": 0
+            },
+            "reconnect_count": 0,
+            "stream_instance_tokens": [
+              3
+            ]
+          },
+          "readback_bps": 192000,
+          "receiver_buffer_delta": 25,
+          "requested_bps": 192000,
+          "stream_generation": 1,
+          "stream_state": "running"
+        }
+      ]
+    },
+    "concurrent_branches": {
+      "continuity": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 111,
+          "last_pts_ns": 2603500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "engine_srt_statistics": {
+        "bandwidth-mbps": 10.92,
+        "bytes-sent-total": 44251,
+        "packets-retransmitted": 0,
+        "packets-sent-lost": 0,
+        "rtt-ms": 3.283,
+        "send-duration-us": 2233809,
+        "send-rate-mbps": 0.13738872246261957
+      },
+      "level_events": 16,
+      "queues": {
+        "level": {
+          "current_buffers": 0,
+          "current_bytes": 0,
+          "current_time_ns": 0,
+          "instance_token": 1,
+          "leaky": 2,
+          "max_buffers": 4,
+          "max_bytes": 0,
+          "max_time_ns": 0
+        },
+        "recording": {
+          "current_buffers": 0,
+          "current_bytes": 0,
+          "current_time_ns": 0,
+          "instance_token": 4,
+          "leaky": 0,
+          "max_buffers": 0,
+          "max_bytes": 0,
+          "max_time_ns": 5000000000
+        },
+        "spectrum": {
+          "current_buffers": 0,
+          "current_bytes": 0,
+          "current_time_ns": 0,
+          "instance_token": 2,
+          "leaky": 2,
+          "max_buffers": 4,
+          "max_bytes": 0,
+          "max_time_ns": 0
+        },
+        "stream": {
+          "current_buffers": 81,
+          "current_bytes": 77760,
+          "current_time_ns": 810000000,
+          "instance_token": 3,
+          "leaky": 0,
+          "max_buffers": 0,
+          "max_bytes": 0,
+          "max_time_ns": 10000000000
+        }
+      },
+      "recording_state": "running",
+      "runtime_srt_statistics": {
+        "bandwidth-mbps": 10.92,
+        "bytes-sent-total": 44251,
+        "packets-retransmitted": 0,
+        "packets-sent-lost": 0,
+        "rtt-ms": 3.094,
+        "send-duration-us": 2209073,
+        "send-rate-mbps": 0.13932500418986907
+      },
+      "spectrum_events": 15,
+      "stream_state": "running"
+    },
+    "monitoring": {
+      "continuity_after": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 1320,
+          "last_pts_ns": 26783500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "continuity_before": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 606,
+          "last_pts_ns": 12503500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "engine_srt_statistics": {
+        "bandwidth-mbps": 8.64,
+        "bytes-sent-total": 650731,
+        "packets-retransmitted": 0,
+        "packets-sent-lost": 0,
+        "rtt-ms": 2.766,
+        "send-duration-us": 25188103,
+        "send-rate-mbps": 0.18093883240418696
+      },
+      "latest_meter_sequence": 202,
+      "latest_spectrum_sequence": 201,
+      "level_events": 170,
+      "queues": {
+        "level": {
+          "current_buffers": 0,
+          "current_bytes": 0,
+          "current_time_ns": 0,
+          "instance_token": 1,
+          "leaky": 2,
+          "max_buffers": 4,
+          "max_bytes": 0,
+          "max_time_ns": 0
+        },
+        "spectrum": {
+          "current_buffers": 0,
+          "current_bytes": 0,
+          "current_time_ns": 0,
+          "instance_token": 2,
+          "leaky": 2,
+          "max_buffers": 4,
+          "max_bytes": 0,
+          "max_time_ns": 0
+        },
+        "stream": {
+          "current_buffers": 756,
+          "current_bytes": 725760,
+          "current_time_ns": 7560000000,
+          "instance_token": 3,
+          "leaky": 0,
+          "max_buffers": 0,
+          "max_bytes": 0,
+          "max_time_ns": 10000000000
+        }
+      },
+      "receiver_buffer_delta": 714,
+      "runtime_srt_statistics": {
+        "bandwidth-mbps": 7.908,
+        "bytes-sent-total": 638211,
+        "packets-retransmitted": 0,
+        "packets-sent-lost": 0,
+        "rtt-ms": 2.346,
+        "send-duration-us": 24802114,
+        "send-rate-mbps": 0.18067131452655535
+      },
+      "spectrum_events": 169,
+      "telemetry_consumers": 0
+    },
+    "reconnect": {
+      "attempt_timeout_seconds": 5.0,
+      "branch_count_at_receiver_restore_delta": 1,
+      "capture_generation": 1,
+      "connection_state": "connected",
+      "continuity_after": {
+        "branch_created_stream_count": 3,
+        "connection_loss_events": 2,
+        "receiver": {
+          "buffer_count": 1358,
+          "last_pts_ns": 41563500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 2,
+        "stream_instance_tokens": [
+          3,
+          7,
+          8
+        ]
+      },
+      "continuity_before": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 1320,
+          "last_pts_ns": 26783500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "fallback_error_code": "srt_connection_timeout",
+      "first_retry_delay_seconds": 1.407,
+      "offline_attempt_cause": "native_srt_error",
+      "offline_attempt_duration_seconds": 2.974,
+      "offline_attempt_error_code": "srt_gstreamer_error_10",
+      "offline_attempt_error_message": "gst-resource-error-quark: Failed to write to SRT socket: Error on SRT socket: Connection timeout (16) (10)",
+      "offline_attempt_removal": {
+        "forced": false,
+        "instance_token": 7,
+        "missing": false
+      },
+      "offline_attempt_token": 7,
+      "receiver_buffer_delta": 38,
+      "receiver_restore_state": "retry_wait",
+      "receiver_restored": true,
+      "receiver_stopped": true,
+      "recovered_instance_token": 8,
+      "recovery_retry_count_delta": 1,
+      "recovery_retry_delay_seconds": 2.32,
+      "retry_count_at_receiver_restore_delta": 1,
+      "retry_count_delta": 2,
+      "stream_generation": 1
+    },
+    "recording": {
+      "capture_generation": 1,
+      "continuity_after": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 202,
+          "last_pts_ns": 4423500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "continuity_before": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 84,
+          "last_pts_ns": 2063500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "last_finalized_file": "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac",
+      "paths": [
+        "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac",
+        "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac"
+      ],
+      "receiver_buffer_delta": 118,
+      "recording_state": "stopped",
+      "representation": "native_capture_flac",
+      "stream_generation": 1,
+      "validations": [
+        {
+          "decoded_buffers": 14,
+          "decoded_to_eos": true,
+          "error": null,
+          "exists": true,
+          "flac_header": true,
+          "path": "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac",
+          "size_bytes": 29899
+        },
+        {
+          "decoded_buffers": 18,
+          "decoded_to_eos": true,
+          "error": null,
+          "exists": true,
+          "flac_header": true,
+          "path": "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac",
+          "size_bytes": 39871
+        }
+      ]
+    },
+    "shutdown": {
+      "capture_state": "stopped",
+      "engine_shutdown_complete": true,
+      "event_order": [
+        "branch-removed:recording",
+        "branch-removed:stream",
+        "branch-removed:level",
+        "branch-removed:spectrum",
+        "capture-stopped:capture",
+        "capture-stopped:capture",
+        "shutdown-complete:capture"
+      ],
+      "last_finalized_file": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac",
+      "recording_path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac",
+      "recording_removals": [
+        {
+          "forced": false,
+          "missing": false,
+          "path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac"
+        }
+      ],
+      "recording_state": "stopped",
+      "requested": true,
+      "service_state": "stopped",
+      "stream_state": "stopped",
+      "validation": {
+        "decoded_buffers": 7,
+        "decoded_to_eos": true,
+        "error": null,
+        "exists": true,
+        "flac_header": true,
+        "path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac",
+        "size_bytes": 15567
+      }
+    },
+    "startup": {
+      "capture_generation": 1,
+      "capture_state": "running",
+      "connection_state": "connected",
+      "continuity": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 33,
+          "last_pts_ns": 1043500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "receiver_buffer_delta": 33,
+      "stream_generation": 1,
+      "stream_state": "running"
+    },
+    "storage_threshold": {
+      "capture_generation": 1,
+      "connection_state": "connected",
+      "continuity_after": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 467,
+          "last_pts_ns": 9723500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "continuity_before": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 202,
+          "last_pts_ns": 4423500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "latch_cleared_state": "stopped",
+      "receiver_buffer_delta_after_stop": 55,
+      "recording_state": "blocked",
+      "recording_warning_code": "storage_unsafe",
+      "stream_generation": 1,
+      "stream_state": "running",
+      "threshold_simulated": true,
+      "used_percent": 90.0,
+      "validation": {
+        "decoded_buffers": 58,
+        "decoded_to_eos": true,
+        "error": null,
+        "exists": true,
+        "flac_header": true,
+        "path": "../alsa-recordings/tinypirelay-20260818T190300.099058Z.flac",
+        "size_bytes": 127418
+      }
+    },
+    "uninterrupted_continuity": {
+      "baseline": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 33,
+          "last_pts_ns": 1043500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "before_intentional_disconnect": {
+        "branch_created_stream_count": 1,
+        "connection_loss_events": 0,
+        "receiver": {
+          "buffer_count": 1320,
+          "last_pts_ns": 26783500000,
+          "missing_pts": 0,
+          "non_monotonic_pts": 0
+        },
+        "reconnect_count": 0,
+        "stream_instance_tokens": [
+          3
+        ]
+      },
+      "phase_names": [
+        "bitrate",
+        "recording",
+        "storage_threshold",
+        "monitoring"
+      ]
+    }
+  },
+  "schema_version": 1,
+  "setup_errors": [],
+  "spike": "step2_real_engine_srt_recording_integration",
+  "started_at_utc": "2026-08-18T19:02:52Z",
+  "step": 2,
+  "timeline": {
+    "dropped": 0,
+    "entries": [
+      {
+        "details": {},
+        "elapsed_seconds": 0.298,
+        "event": "receiver.started",
+        "sequence": 1
+      },
+      {
+        "details": {
+          "label": "capture RUNNING"
+        },
+        "elapsed_seconds": 0.544,
+        "event": "wait.started",
+        "sequence": 2
+      },
+      {
+        "details": {
+          "generation": 1
+        },
+        "elapsed_seconds": 0.717,
+        "event": "capture-started:capture",
+        "sequence": 3
+      },
+      {
+        "details": {
+          "label": "capture RUNNING"
+        },
+        "elapsed_seconds": 0.765,
+        "event": "wait.completed",
+        "sequence": 4
+      },
+      {
+        "details": {
+          "label": "Opus stream connection and decoded buffers"
+        },
+        "elapsed_seconds": 0.919,
+        "event": "wait.started",
+        "sequence": 5
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 3,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 1.224,
+        "event": "branch-created:stream",
+        "sequence": 6
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 3,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 1.228,
+        "event": "branch-added:stream",
+        "sequence": 7
+      },
+      {
+        "details": {
+          "label": "Opus stream connection and decoded buffers"
+        },
+        "elapsed_seconds": 2.02,
+        "event": "wait.completed",
+        "sequence": 8
+      },
+      {
+        "details": {
+          "label": "Opus bitrate readback 64000"
+        },
+        "elapsed_seconds": 2.041,
+        "event": "wait.started",
+        "sequence": 9
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 3,
+          "new_bps": 64000,
+          "old_bps": 128000
+        },
+        "elapsed_seconds": 2.093,
+        "event": "opus-bitrate-changed:stream",
+        "sequence": 10
+      },
+      {
+        "details": {
+          "label": "Opus bitrate readback 64000"
+        },
+        "elapsed_seconds": 2.618,
+        "event": "wait.completed",
+        "sequence": 11
+      },
+      {
+        "details": {
+          "label": "Opus bitrate readback 192000"
+        },
+        "elapsed_seconds": 2.643,
+        "event": "wait.started",
+        "sequence": 12
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 3,
+          "new_bps": 192000,
+          "old_bps": 64000
+        },
+        "elapsed_seconds": 2.647,
+        "event": "opus-bitrate-changed:stream",
+        "sequence": 13
+      },
+      {
+        "details": {
+          "label": "Opus bitrate readback 192000"
+        },
+        "elapsed_seconds": 3.201,
+        "event": "wait.completed",
+        "sequence": 14
+      },
+      {
+        "details": {
+          "label": "first recording RUNNING"
+        },
+        "elapsed_seconds": 3.425,
+        "event": "wait.started",
+        "sequence": 15
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 4,
+          "path": "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac"
+        },
+        "elapsed_seconds": 3.741,
+        "event": "branch-created:recording",
+        "sequence": 16
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 4,
+          "path": "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac"
+        },
+        "elapsed_seconds": 3.77,
+        "event": "branch-added:recording",
+        "sequence": 17
+      },
+      {
+        "details": {
+          "label": "first recording RUNNING"
+        },
+        "elapsed_seconds": 3.793,
+        "event": "wait.completed",
+        "sequence": 18
+      },
+      {
+        "details": {
+          "label": "receiver progress during first recording"
+        },
+        "elapsed_seconds": 3.794,
+        "event": "wait.started",
+        "sequence": 19
+      },
+      {
+        "details": {
+          "label": "receiver progress during first recording"
+        },
+        "elapsed_seconds": 4.076,
+        "event": "wait.completed",
+        "sequence": 20
+      },
+      {
+        "details": {
+          "label": "concurrent SRT statistics and queue contracts"
+        },
+        "elapsed_seconds": 4.077,
+        "event": "wait.started",
+        "sequence": 21
+      },
+      {
+        "details": {
+          "label": "concurrent SRT statistics and queue contracts"
+        },
+        "elapsed_seconds": 4.118,
+        "event": "wait.completed",
+        "sequence": 22
+      },
+      {
+        "details": {
+          "label": "manual recording rotation finalization"
+        },
+        "elapsed_seconds": 4.26,
+        "event": "wait.started",
+        "sequence": 23
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 5,
+          "path": "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac"
+        },
+        "elapsed_seconds": 4.648,
+        "event": "branch-created:recording",
+        "sequence": 24
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 4,
+          "path": "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac"
+        },
+        "elapsed_seconds": 5.072,
+        "event": "branch-removed:recording",
+        "sequence": 25
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "new_instance_token": 5,
+          "new_path": "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac",
+          "old_instance_token": 4,
+          "old_path": "../alsa-recordings/tinypirelay-20260818T190256.283129Z.flac"
+        },
+        "elapsed_seconds": 5.095,
+        "event": "recording-rotated:recording",
+        "sequence": 26
+      },
+      {
+        "details": {
+          "label": "manual recording rotation finalization"
+        },
+        "elapsed_seconds": 5.123,
+        "event": "wait.completed",
+        "sequence": 27
+      },
+      {
+        "details": {
+          "label": "receiver progress after rotation"
+        },
+        "elapsed_seconds": 5.124,
+        "event": "wait.started",
+        "sequence": 28
+      },
+      {
+        "details": {
+          "label": "receiver progress after rotation"
+        },
+        "elapsed_seconds": 5.859,
+        "event": "wait.completed",
+        "sequence": 29
+      },
+      {
+        "details": {
+          "label": "rotated recording STOPPED"
+        },
+        "elapsed_seconds": 5.88,
+        "event": "wait.started",
+        "sequence": 30
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 5,
+          "path": "../alsa-recordings/tinypirelay-20260818T190257.180500Z.flac"
+        },
+        "elapsed_seconds": 6.158,
+        "event": "branch-removed:recording",
+        "sequence": 31
+      },
+      {
+        "details": {
+          "label": "rotated recording STOPPED"
+        },
+        "elapsed_seconds": 6.161,
+        "event": "wait.completed",
+        "sequence": 32
+      },
+      {
+        "details": {
+          "label": "threshold recording RUNNING"
+        },
+        "elapsed_seconds": 7.14,
+        "event": "wait.started",
+        "sequence": 33
+      },
+      {
+        "details": {
+          "generation": 2,
+          "instance_token": 6,
+          "path": "../alsa-recordings/tinypirelay-20260818T190300.099058Z.flac"
+        },
+        "elapsed_seconds": 7.52,
+        "event": "branch-created:recording",
+        "sequence": 34
+      },
+      {
+        "details": {
+          "generation": 2,
+          "instance_token": 6,
+          "path": "../alsa-recordings/tinypirelay-20260818T190300.099058Z.flac"
+        },
+        "elapsed_seconds": 7.55,
+        "event": "branch-added:recording",
+        "sequence": 35
+      },
+      {
+        "details": {
+          "label": "threshold recording RUNNING"
+        },
+        "elapsed_seconds": 7.591,
+        "event": "wait.completed",
+        "sequence": 36
+      },
+      {
+        "details": {
+          "label": "receiver progress before threshold injection"
+        },
+        "elapsed_seconds": 7.608,
+        "event": "wait.started",
+        "sequence": 37
+      },
+      {
+        "details": {
+          "label": "receiver progress before threshold injection"
+        },
+        "elapsed_seconds": 8.298,
+        "event": "wait.completed",
+        "sequence": 38
+      },
+      {
+        "details": {
+          "used_percent": 90.0
+        },
+        "elapsed_seconds": 8.299,
+        "event": "storage.threshold_injected",
+        "sequence": 39
+      },
+      {
+        "details": {
+          "label": "90 percent recording hard stop"
+        },
+        "elapsed_seconds": 8.3,
+        "event": "wait.started",
+        "sequence": 40
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 2,
+          "instance_token": 6,
+          "path": "../alsa-recordings/tinypirelay-20260818T190300.099058Z.flac"
+        },
+        "elapsed_seconds": 12.949,
+        "event": "branch-removed:recording",
+        "sequence": 41
+      },
+      {
+        "details": {
+          "label": "90 percent recording hard stop"
+        },
+        "elapsed_seconds": 12.958,
+        "event": "wait.completed",
+        "sequence": 42
+      },
+      {
+        "details": {
+          "label": "receiver progress after recording hard stop"
+        },
+        "elapsed_seconds": 12.958,
+        "event": "wait.started",
+        "sequence": 43
+      },
+      {
+        "details": {
+          "label": "receiver progress after recording hard stop"
+        },
+        "elapsed_seconds": 13.6,
+        "event": "wait.completed",
+        "sequence": 44
+      },
+      {
+        "details": {},
+        "elapsed_seconds": 14.548,
+        "event": "storage.threshold_cleared",
+        "sequence": 45
+      },
+      {
+        "details": {
+          "label": "storage safety latch clear"
+        },
+        "elapsed_seconds": 14.548,
+        "event": "wait.started",
+        "sequence": 46
+      },
+      {
+        "details": {
+          "label": "storage safety latch clear"
+        },
+        "elapsed_seconds": 17.968,
+        "event": "wait.completed",
+        "sequence": 47
+      },
+      {
+        "details": {
+          "label": "minimum no-consumer evidence window"
+        },
+        "elapsed_seconds": 17.976,
+        "event": "wait.started",
+        "sequence": 48
+      },
+      {
+        "details": {
+          "label": "minimum no-consumer evidence window"
+        },
+        "elapsed_seconds": 35.022,
+        "event": "wait.completed",
+        "sequence": 49
+      },
+      {
+        "details": {},
+        "elapsed_seconds": 35.066,
+        "event": "receiver.stopped",
+        "sequence": 50
+      },
+      {
+        "details": {
+          "label": "disconnected caller branch removal"
+        },
+        "elapsed_seconds": 35.069,
+        "event": "wait.started",
+        "sequence": 51
+      },
+      {
+        "details": {
+          "code": 10,
+          "generation": 1,
+          "instance_token": 3,
+          "message": "gst-resource-error-quark: Failed to write to SRT socket: Socket is broken or closed (10)",
+          "state": "disconnected"
+        },
+        "elapsed_seconds": 35.131,
+        "event": "connection:stream",
+        "sequence": 52
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 3,
+          "path": ""
+        },
+        "elapsed_seconds": 35.33,
+        "event": "branch-removed:stream",
+        "sequence": 53
+      },
+      {
+        "details": {
+          "label": "disconnected caller branch removal"
+        },
+        "elapsed_seconds": 35.368,
+        "event": "wait.completed",
+        "sequence": 54
+      },
+      {
+        "details": {
+          "label": "offline retry branch creation"
+        },
+        "elapsed_seconds": 35.369,
+        "event": "wait.started",
+        "sequence": 55
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 7,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 36.409,
+        "event": "branch-created:stream",
+        "sequence": 56
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 7,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 36.412,
+        "event": "branch-added:stream",
+        "sequence": 57
+      },
+      {
+        "details": {
+          "label": "offline retry branch creation"
+        },
+        "elapsed_seconds": 36.435,
+        "event": "wait.completed",
+        "sequence": 58
+      },
+      {
+        "details": {
+          "label": "offline retry completion and physical removal"
+        },
+        "elapsed_seconds": 36.436,
+        "event": "wait.started",
+        "sequence": 59
+      },
+      {
+        "details": {
+          "code": 10,
+          "generation": 1,
+          "instance_token": 7,
+          "message": "gst-resource-error-quark: Failed to write to SRT socket: Error on SRT socket: Connection timeout (16) (10)",
+          "state": "disconnected"
+        },
+        "elapsed_seconds": 39.231,
+        "event": "connection:stream",
+        "sequence": 60
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 7,
+          "path": ""
+        },
+        "elapsed_seconds": 39.398,
+        "event": "branch-removed:stream",
+        "sequence": 61
+      },
+      {
+        "details": {
+          "label": "offline retry completion and physical removal"
+        },
+        "elapsed_seconds": 39.409,
+        "event": "wait.completed",
+        "sequence": 62
+      },
+      {
+        "details": {},
+        "elapsed_seconds": 39.431,
+        "event": "receiver.started",
+        "sequence": 63
+      },
+      {
+        "details": {
+          "label": "post-offline recovery branch creation"
+        },
+        "elapsed_seconds": 39.434,
+        "event": "wait.started",
+        "sequence": 64
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 8,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 41.661,
+        "event": "branch-created:stream",
+        "sequence": 65
+      },
+      {
+        "details": {
+          "generation": 1,
+          "instance_token": 8,
+          "representation_id": "opus_128k_48000_stereo_matroska"
+        },
+        "elapsed_seconds": 41.697,
+        "event": "branch-added:stream",
+        "sequence": 66
+      },
+      {
+        "details": {
+          "label": "post-offline recovery branch creation"
+        },
+        "elapsed_seconds": 41.729,
+        "event": "wait.completed",
+        "sequence": 67
+      },
+      {
+        "details": {
+          "label": "receiver restore and decoded progress"
+        },
+        "elapsed_seconds": 41.729,
+        "event": "wait.started",
+        "sequence": 68
+      },
+      {
+        "details": {
+          "label": "receiver restore and decoded progress"
+        },
+        "elapsed_seconds": 42.59,
+        "event": "wait.completed",
+        "sequence": 69
+      },
+      {
+        "details": {
+          "label": "shutdown recording RUNNING and receiver progress"
+        },
+        "elapsed_seconds": 42.747,
+        "event": "wait.started",
+        "sequence": 70
+      },
+      {
+        "details": {
+          "generation": 3,
+          "instance_token": 9,
+          "path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac"
+        },
+        "elapsed_seconds": 43.003,
+        "event": "branch-created:recording",
+        "sequence": 71
+      },
+      {
+        "details": {
+          "generation": 3,
+          "instance_token": 9,
+          "path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac"
+        },
+        "elapsed_seconds": 43.029,
+        "event": "branch-added:recording",
+        "sequence": 72
+      },
+      {
+        "details": {
+          "label": "shutdown recording RUNNING and receiver progress"
+        },
+        "elapsed_seconds": 43.29,
+        "event": "wait.completed",
+        "sequence": 73
+      },
+      {
+        "details": {
+          "label": "engine shutdown completion"
+        },
+        "elapsed_seconds": 43.312,
+        "event": "wait.started",
+        "sequence": 74
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 3,
+          "instance_token": 9,
+          "path": "../alsa-recordings/tinypirelay-20260818T190335.667029Z.flac"
+        },
+        "elapsed_seconds": 43.58,
+        "event": "branch-removed:recording",
+        "sequence": 75
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 8,
+          "path": ""
+        },
+        "elapsed_seconds": 44.539,
+        "event": "branch-removed:stream",
+        "sequence": 76
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 1,
+          "path": ""
+        },
+        "elapsed_seconds": 44.593,
+        "event": "branch-removed:level",
+        "sequence": 77
+      },
+      {
+        "details": {
+          "forced": false,
+          "generation": 1,
+          "instance_token": 2,
+          "path": ""
+        },
+        "elapsed_seconds": 44.594,
+        "event": "branch-removed:spectrum",
+        "sequence": 78
+      },
+      {
+        "details": {
+          "generation": 1
+        },
+        "elapsed_seconds": 44.599,
+        "event": "capture-stopped:capture",
+        "sequence": 79
+      },
+      {
+        "details": {
+          "generation": 1
+        },
+        "elapsed_seconds": 44.6,
+        "event": "capture-stopped:capture",
+        "sequence": 80
+      },
+      {
+        "details": {
+          "generation": 1
+        },
+        "elapsed_seconds": 44.601,
+        "event": "shutdown-complete:capture",
+        "sequence": 81
+      },
+      {
+        "details": {
+          "label": "engine shutdown completion"
+        },
+        "elapsed_seconds": 44.642,
+        "event": "wait.completed",
+        "sequence": 82
+      },
+      {
+        "details": {},
+        "elapsed_seconds": 44.649,
+        "event": "receiver.stopped",
+        "sequence": 83
+      }
+    ],
+    "limit": 256
+  },
+  "versions": {
+    "elements": {
+      "alsasrc": {
+        "plugin": "alsa",
+        "version": "1.26.2"
+      },
+      "audioconvert": {
+        "plugin": "audioconvert",
+        "version": "1.26.2"
+      },
+      "audioresample": {
+        "plugin": "audioresample",
+        "version": "1.26.2"
+      },
+      "capsfilter": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "fakesink": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "filesink": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "filesrc": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "flacdec": {
+        "plugin": "flac",
+        "version": "1.26.2"
+      },
+      "flacenc": {
+        "plugin": "flac",
+        "version": "1.26.2"
+      },
+      "flacparse": {
+        "plugin": "audioparsers",
+        "version": "1.26.2"
+      },
+      "identity": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "level": {
+        "plugin": "level",
+        "version": "1.26.2"
+      },
+      "matroskademux": {
+        "plugin": "matroska",
+        "version": "1.26.2"
+      },
+      "matroskamux": {
+        "plugin": "matroska",
+        "version": "1.26.2"
+      },
+      "opusdec": {
+        "plugin": "opus",
+        "version": "1.26.2"
+      },
+      "opusenc": {
+        "plugin": "opus",
+        "version": "1.26.2"
+      },
+      "opusparse": {
+        "plugin": "opusparse",
+        "version": "1.26.2"
+      },
+      "queue": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "spectrum": {
+        "plugin": "spectrum",
+        "version": "1.26.2"
+      },
+      "srtsink": {
+        "plugin": "srt",
+        "version": "1.26.2"
+      },
+      "srtsrc": {
+        "plugin": "srt",
+        "version": "1.26.2"
+      },
+      "tee": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "valve": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      }
+    },
+    "gstreamer": "GStreamer 1.26.2"
+  }
+}

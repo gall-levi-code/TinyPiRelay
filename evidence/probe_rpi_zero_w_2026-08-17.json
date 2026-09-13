@@ -1,0 +1,339 @@
+{
+  "actions": [
+    "Connect or enable an ALSA capture device, then verify it with `arecord -l`.",
+    "Install `gstreamer1.0-tools` to provide: gst-launch-1.0, gst-inspect-1.0.",
+    "Rerun `gst-inspect-1.0` successfully to verify required element factories."
+  ],
+  "audio": {
+    "capture_devices": [],
+    "reason": "arecord found no ALSA hardware capture devices",
+    "status": "missing",
+    "tool": "arecord"
+  },
+  "gstreamer": {
+    "plugins": {},
+    "registry_update_disabled": true,
+    "required_elements": {
+      "alsasrc": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "audioconvert": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "audioresample": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "capsfilter": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "flacenc": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "level": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "opusenc": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "queue": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "spectrum": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "srtsink": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "tee": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      }
+    },
+    "required_status": {
+      "status": "unverified"
+    },
+    "spike_elements": {
+      "audiotestsrc": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "fakesink": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "flacdec": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "flacparse": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "identity": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "matroskademux": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "matroskamux": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "opusdec": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "opusparse": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      },
+      "srtsrc": {
+        "availability_status": "unverified",
+        "plugin": null,
+        "plugin_version": null,
+        "reason": "gst-inspect-1.0 is unavailable",
+        "status": "unverified"
+      }
+    },
+    "spike_status": {
+      "status": "unverified"
+    },
+    "status": "missing",
+    "tools": {
+      "gst-inspect-1.0": {
+        "reason": "command not found",
+        "status": "missing",
+        "version": null
+      },
+      "gst-launch-1.0": {
+        "reason": "command not found",
+        "status": "missing",
+        "version": null
+      }
+    },
+    "tools_status": {
+      "status": "missing"
+    }
+  },
+  "hardware": {
+    "board": {
+      "model": "Raspberry Pi Zero W Rev 1.1",
+      "model_source": "/proc/device-tree/model",
+      "reason": null,
+      "revision": "9000c1",
+      "revision_source": "/proc/cpuinfo",
+      "status": "present"
+    },
+    "cpu": {
+      "hardware": "BCM2835",
+      "logical_cpus": 1,
+      "model": "ARMv6-compatible processor rev 7 (v6l)",
+      "reason": null,
+      "status": "present"
+    },
+    "memory": {
+      "reason": null,
+      "status": "present",
+      "total_bytes": 447647744
+    },
+    "status": "present"
+  },
+  "packages": {
+    "items": {
+      "alsa-utils": {
+        "candidate_version": "1.2.14-1+rpt1",
+        "installed": true,
+        "installed_version": "1.2.14-1+rpt1",
+        "reason": null,
+        "status": "present"
+      },
+      "gir1.2-gst-plugins-base-1.0": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gir1.2-gstreamer-1.0": {
+        "candidate_version": "1.26.2-2",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-alsa": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-bad": {
+        "candidate_version": "1.26.2-3+rpt3+deb13u2",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-base": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-good": {
+        "candidate_version": "1.26.2-1+deb13u2",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-tools": {
+        "candidate_version": "1.26.2-2",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "libgstreamer1.0-0": {
+        "candidate_version": "1.26.2-2",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      },
+      "python3": {
+        "candidate_version": "3.13.5-1",
+        "installed": true,
+        "installed_version": "3.13.5-1",
+        "reason": null,
+        "status": "present"
+      },
+      "python3-gi": {
+        "candidate_version": "3.50.0-4",
+        "installed": false,
+        "installed_version": null,
+        "reason": null,
+        "status": "present"
+      }
+    },
+    "manager": "apt",
+    "reason": null,
+    "status": "present"
+  },
+  "platform": {
+    "dpkg_architecture": {
+      "reason": null,
+      "status": "present",
+      "value": "armhf"
+    },
+    "kernel": {
+      "machine": "armv6l",
+      "reason": null,
+      "release": "6.18.34+rpt-rpi-v6",
+      "status": "present",
+      "system": "Linux"
+    },
+    "os_release": {
+      "id": "raspbian",
+      "name": "Raspbian GNU/Linux",
+      "pretty_name": "Raspbian GNU/Linux 13 (trixie)",
+      "reason": null,
+      "source": "/etc/os-release",
+      "status": "present",
+      "version_codename": "trixie",
+      "version_id": "13"
+    },
+    "status": "present",
+    "userland_bitness": {
+      "bits": 32,
+      "method": "getconf_LONG_BIT",
+      "reason": null,
+      "status": "present"
+    }
+  },
+  "schema_version": 1,
+  "status": "missing",
+  "storage": {
+    "free_bytes": 117970485248,
+    "path": "/",
+    "reason": null,
+    "status": "present",
+    "total_bytes": 125296353280,
+    "used_bytes": 2195775488,
+    "used_percent": 1.8
+  }
+}

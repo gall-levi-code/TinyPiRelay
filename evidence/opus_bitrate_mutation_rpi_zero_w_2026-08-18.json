@@ -1,0 +1,238 @@
+{
+  "bus": {
+    "eos": [],
+    "errors": []
+  },
+  "configuration": {
+    "bitrate_sequence_bps": [
+      128000,
+      192000,
+      64000,
+      96000,
+      128000
+    ],
+    "max_pts_gap_ms": 60.0,
+    "min_buffers_per_phase": 25,
+    "phase_timeout_seconds": 15.0,
+    "port": 9103,
+    "source_caps": "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2"
+  },
+  "duration_seconds": 4.744405,
+  "ended_at_utc": "2026-08-18T12:59:44Z",
+  "initial": {
+    "progress_within_timeout": true,
+    "readback_bps": 128000,
+    "receiver": {
+      "buffer_count": 25,
+      "last_pts_ns": 528500000,
+      "max_gap_ns": 20000000,
+      "missing_pts": 0,
+      "non_monotonic_pts": 0
+    },
+    "receiver_state": "playing",
+    "requested_bps": 128000,
+    "sender_state": "playing"
+  },
+  "pipelines": {
+    "receiver": "srtsrc uri=\"srt://:9103?mode=listener&latency=200\" ! matroskademux ! queue ! opusparse ! opusdec ! audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2 ! identity name=receiver_counter signal-handoffs=true silent=true ! fakesink sync=false",
+    "sender": "audiotestsrc is-live=true wave=sine samplesperbuffer=960 ! audioconvert ! audioresample ! audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2 ! opusenc name=encoder bitrate=128000 ! opusparse ! matroskamux streamable=true ! srtsink uri=\"srt://127.0.0.1:9103?mode=caller&latency=200\" wait-for-connection=true"
+  },
+  "platform": {
+    "hostname": "TinyPiRelay",
+    "machine": "armv6l",
+    "python": "3.13.5",
+    "release": "6.18.34+rpt-rpi-v6",
+    "system": "Linux"
+  },
+  "production_component": false,
+  "receiver": {
+    "buffer_count": 126,
+    "last_pts_ns": 2548500000,
+    "max_gap_ns": 20000000,
+    "missing_pts": 0,
+    "non_monotonic_pts": 0
+  },
+  "result": {
+    "continuous_receive_demonstrated": true,
+    "property_changes_demonstrated": true,
+    "reasons": [],
+    "status": "pass"
+  },
+  "schema_version": 1,
+  "setup_errors": [],
+  "spike": "opus_runtime_bitrate_mutation_srt_loopback",
+  "started_at_utc": "2026-08-18T12:59:39Z",
+  "step": 1,
+  "transitions": [
+    {
+      "after": {
+        "buffer_count": 50,
+        "last_pts_ns": 1028500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "before": {
+        "buffer_count": 25,
+        "last_pts_ns": 528500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "buffer_delta": 25,
+      "elapsed_seconds": 0.507117,
+      "from_bps": 128000,
+      "progress_within_timeout": true,
+      "pts_advanced": true,
+      "readback_bps": 192000,
+      "receiver_state_after": "playing",
+      "receiver_state_before": "playing",
+      "requested_bps": 192000,
+      "sender_state_after": "playing",
+      "sender_state_before": "playing"
+    },
+    {
+      "after": {
+        "buffer_count": 76,
+        "last_pts_ns": 1548500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "before": {
+        "buffer_count": 50,
+        "last_pts_ns": 1028500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "buffer_delta": 26,
+      "elapsed_seconds": 0.513829,
+      "from_bps": 192000,
+      "progress_within_timeout": true,
+      "pts_advanced": true,
+      "readback_bps": 64000,
+      "receiver_state_after": "playing",
+      "receiver_state_before": "playing",
+      "requested_bps": 64000,
+      "sender_state_after": "playing",
+      "sender_state_before": "playing"
+    },
+    {
+      "after": {
+        "buffer_count": 101,
+        "last_pts_ns": 2048500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "before": {
+        "buffer_count": 76,
+        "last_pts_ns": 1548500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "buffer_delta": 25,
+      "elapsed_seconds": 0.515026,
+      "from_bps": 64000,
+      "progress_within_timeout": true,
+      "pts_advanced": true,
+      "readback_bps": 96000,
+      "receiver_state_after": "playing",
+      "receiver_state_before": "playing",
+      "requested_bps": 96000,
+      "sender_state_after": "playing",
+      "sender_state_before": "playing"
+    },
+    {
+      "after": {
+        "buffer_count": 126,
+        "last_pts_ns": 2548500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "before": {
+        "buffer_count": 101,
+        "last_pts_ns": 2048500000,
+        "max_gap_ns": 20000000,
+        "missing_pts": 0,
+        "non_monotonic_pts": 0
+      },
+      "buffer_delta": 25,
+      "elapsed_seconds": 0.488431,
+      "from_bps": 96000,
+      "progress_within_timeout": true,
+      "pts_advanced": true,
+      "readback_bps": 128000,
+      "receiver_state_after": "playing",
+      "receiver_state_before": "playing",
+      "requested_bps": 128000,
+      "sender_state_after": "playing",
+      "sender_state_before": "playing"
+    }
+  ],
+  "versions": {
+    "elements": {
+      "audioconvert": {
+        "plugin": "audioconvert",
+        "version": "1.26.2"
+      },
+      "audioresample": {
+        "plugin": "audioresample",
+        "version": "1.26.2"
+      },
+      "audiotestsrc": {
+        "plugin": "audiotestsrc",
+        "version": "1.26.2"
+      },
+      "capsfilter": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "fakesink": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "identity": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "matroskademux": {
+        "plugin": "matroska",
+        "version": "1.26.2"
+      },
+      "matroskamux": {
+        "plugin": "matroska",
+        "version": "1.26.2"
+      },
+      "opusdec": {
+        "plugin": "opus",
+        "version": "1.26.2"
+      },
+      "opusenc": {
+        "plugin": "opus",
+        "version": "1.26.2"
+      },
+      "opusparse": {
+        "plugin": "opusparse",
+        "version": "1.26.2"
+      },
+      "queue": {
+        "plugin": "coreelements",
+        "version": "1.26.2"
+      },
+      "srtsink": {
+        "plugin": "srt",
+        "version": "1.26.2"
+      },
+      "srtsrc": {
+        "plugin": "srt",
+        "version": "1.26.2"
+      }
+    },
+    "gstreamer": "GStreamer 1.26.2",
+    "pygobject": "3.50.0"
+  }
+}

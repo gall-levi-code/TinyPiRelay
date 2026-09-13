@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "devices": [
+    {
+      "id": "hw:CARD=iMM6C,DEV=0",
+      "label": "Dayton Audio iMM-6C USB microphone",
+      "evidence_status": "Hardware tested",
+      "modes": [
+        {
+          "format": "S16LE",
+          "rate_hz": 48000,
+          "channels": 1,
+          "native": true,
+          "evidence_status": "Hardware tested",
+          "stream_options": [
+            {
+              "representation_id": "pcm_s16le_48000_stereo_matroska",
+              "conversion": "Native mono is channel-converted to stereo; format and rate are unchanged.",
+              "evidence_status": "Hardware tested"
+            },
+            {
+              "representation_id": "flac_48000_stereo_matroska",
+              "conversion": "Native mono is channel-converted to stereo; format and rate are unchanged.",
+              "evidence_status": "Hardware tested"
+            },
+            {
+              "representation_id": "opus_128k_48000_stereo_matroska",
+              "conversion": "Native mono is channel-converted to stereo; format and rate are unchanged.",
+              "evidence_status": "Hardware tested"
+            }
+          ]
+        },
+        {
+          "format": "S24LE",
+          "rate_hz": 48000,
+          "channels": 1,
+          "native": true,
+          "evidence_status": "Hardware tested",
+          "stream_options": [
+            {
+              "representation_id": "flac_48000_stereo_matroska",
+              "conversion": "Native 24-bit mono is converted to 16-bit stereo at 48 kHz before FLAC encoding. The stream does not preserve the original 24-bit samples; local recording remains native 24-bit mono. Pi 4 finite validation: docs/evidence/RPI4_S24_FLAC_BIRDNET_2026-09-09.md.",
+              "evidence_status": "Hardware tested"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plughw:CARD=USB,DEV=0",
+      "label": "Focusrite Scarlett Solo (3rd Gen.) USB audio interface",
+      "evidence_status": "Hardware tested",
+      "modes": [
+        {
+          "format": "S24_32LE",
+          "rate_hz": 48000,
+          "channels": 2,
+          "native": false,
+          "evidence_status": "Hardware tested",
+          "stream_options": []
+        }
+      ]
+    }
+  ],
+  "representations": [
+    {
+      "id": "pcm_s16le_48000_stereo_matroska",
+      "label": "PCM S16LE 48 kHz stereo / Matroska",
+      "codec": "PCM S16LE",
+      "container": "streamable Matroska",
+      "lossless": true,
+      "bitrate_bps": 1536000,
+      "evidence_status": "Hardware tested"
+    },
+    {
+      "id": "flac_48000_stereo_matroska",
+      "label": "FLAC 48 kHz stereo / Matroska",
+      "codec": "FLAC",
+      "container": "streamable Matroska",
+      "lossless": true,
+      "bitrate_bps": null,
+      "evidence_status": "Hardware tested"
+    },
+    {
+      "id": "opus_128k_48000_stereo_matroska",
+      "label": "Opus 48 kHz stereo / Matroska",
+      "codec": "Opus",
+      "container": "streamable Matroska",
+      "lossless": false,
+      "bitrate_bps": 128000,
+      "evidence_status": "Hardware tested"
+    }
+  ]
+}

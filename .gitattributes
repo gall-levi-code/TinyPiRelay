@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Evidence artifacts carry byte-level SHA-256 references; preserve their bytes.
+/evidence/** -text

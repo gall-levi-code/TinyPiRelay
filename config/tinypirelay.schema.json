@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TinyPiRelay configuration",
+  "description": "Runtime capability evidence is an additional validation boundary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "capture",
+    "stream",
+    "recording",
+    "monitoring"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device_id", "mode"],
+      "properties": {
+        "device_id": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+          "description": "Runtime limit is 256 UTF-8 bytes; control characters are rejected."
+        },
+        "mode": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["format", "rate_hz", "channels"],
+              "properties": {
+                "format": {
+                  "enum": ["S16LE", "S24LE", "S24_32LE", "S32LE"]
+                },
+                "rate_hz": {
+                  "enum": [44100, 48000, 96000]
+                },
+                "channels": {
+                  "enum": [1, 2]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "enabled": {"const": true}
+            },
+            "required": ["enabled"]
+          },
+          "then": {
+            "properties": {
+              "representation_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "destination_host": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 253
+              },
+              "destination_port": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65535
+              }
+            }
+          }
+        }
+      ],
+      "required": [
+        "enabled",
+        "representation_id",
+        "destination_host",
+        "destination_port",
+        "latency_ms",
+        "stream_id",
+        "passphrase",
+        "opus_bitrate_bps"
+      ],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "representation_id": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Must also be enabled by the runtime compatibility gate."
+        },
+        "destination_host": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 253,
+          "pattern": "^(?:\\[[0-9A-Fa-f:.]+\\]|[0-9A-Fa-f:.]*:[0-9A-Fa-f:.]+|[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\\.?)$",
+          "description": "ASCII DNS hostname, strict IPv4 literal, or bracketed/unbracketed IPv6 literal; runtime performs semantic IP validation."
+        },
+        "destination_port": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 8000
+        },
+        "stream_id": {
+          "type": ["string", "null"],
+          "maxLength": 512,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*$",
+          "description": "Runtime limit is 512 UTF-8 bytes; control characters are rejected."
+        },
+        "passphrase": {
+          "type": ["string", "null"],
+          "minLength": 10,
+          "maxLength": 79,
+          "pattern": "^[\\u0020-\\u007E]{10,79}$",
+          "description": "Conservative interoperability contract: 10 to 79 printable ASCII characters."
+        },
+        "opus_bitrate_bps": {
+          "enum": [64000, 96000, 128000, 192000]
+        }
+      }
+    },
+    "recording": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["directory", "rotation_seconds", "required_mountpoint"],
+      "properties": {
+        "directory": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+          "description": "Runtime limit is 2048 UTF-8 bytes; control characters are rejected."
+        },
+        "rotation_seconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 2678400
+        },
+        "required_mountpoint": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]+$",
+          "description": "When set, recording is refused unless this exact mountpoint is mounted and contains the destination. Runtime limit is 2048 UTF-8 bytes; control characters are rejected."
+        }
+      }
+    },
+    "monitoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spectrum_updates_per_second", "spectrum_bands"],
+      "properties": {
+        "spectrum_updates_per_second": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "spectrum_bands": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 2048
+        }
+      }
+    }
+  }
+}

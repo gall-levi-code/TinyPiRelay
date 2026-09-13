@@ -1,0 +1,47 @@
+{
+  "cycles": [
+    {
+      "cycle": 1,
+      "lease_active": true,
+      "meter_advanced": true,
+      "removal": "release",
+      "sequence": 1
+    },
+    {
+      "cycle": 2,
+      "lease_active": true,
+      "meter_advanced": true,
+      "removal": "expiry",
+      "sequence": 6
+    },
+    {
+      "cycle": 3,
+      "lease_active": true,
+      "meter_advanced": true,
+      "removal": "release",
+      "sequence": 34
+    }
+  ],
+  "generations_after": {
+    "capture": 1,
+    "recording": 1,
+    "stream": 1
+  },
+  "generations_before": {
+    "capture": 1,
+    "recording": 1,
+    "stream": 1
+  },
+  "generations_stable": true,
+  "monitoring_error": null,
+  "srt_bytes_advanced": true,
+  "srt_bytes_after": 1660933,
+  "srt_bytes_before": 1497708,
+  "states": {
+    "capture": "running",
+    "connection": "connected",
+    "recording": "running",
+    "stream": "running"
+  },
+  "status": "pass"
+}

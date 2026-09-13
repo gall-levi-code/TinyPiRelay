@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "step": 4,
+  "evidence_classification": {
+    "label": "physical-hardware",
+    "hardware_tested": true,
+    "production_component": true,
+    "scope": "finite installed-appliance acceptance",
+    "overall_board_label": "likely compatible / untested",
+    "claim_limit": "Only the checks explicitly marked true in this artifact are physical-hardware claims."
+  },
+  "identity": {
+    "test_date_utc": "2026-08-20",
+    "working_tree": "unborn master; uncommitted and untracked; no commit identity",
+    "installed_version": "0.4.0-dev",
+    "target": {
+      "model": "Raspberry Pi Zero W Rev 1.1",
+      "revision": "9000c1",
+      "cpu": "BCM2835",
+      "logical_cpus": 1,
+      "machine": "armv6l",
+      "userland_bits": 32,
+      "dpkg_architecture": "armhf",
+      "os": "Raspbian GNU/Linux 13 (trixie)",
+      "kernel": "6.18.34+rpt-rpi-v6",
+      "memory_total_bytes": 447647744
+    },
+    "audio_device": {
+      "name": "Dayton Audio iMM-6C",
+      "alsa_id": "hw:CARD=iMM6C,DEV=0",
+      "card": 0,
+      "device": 0,
+      "capture_format": "S16LE",
+      "sample_rate_hz": 48000,
+      "channels": 1
+    },
+    "final_source_archive": {
+      "sha256": "9505ac00966b0015289d0f214cf824e280ee24371083a892a608fa424b044b10",
+      "size_bytes": 347804,
+      "tar_members": 119,
+      "installed_payload_sha256": "287ccd1436e112f012dd1610cab9f8a81da7d18c336b6804e7f045a8f02cc339"
+    },
+    "installed_state": {
+      "schema_version": 2,
+      "phase": "complete",
+      "installed_version": "0.4.0-dev",
+      "target_version": "0.4.0-dev",
+      "source_sha256": "287ccd1436e112f012dd1610cab9f8a81da7d18c336b6804e7f045a8f02cc339",
+      "previous_version": null,
+      "previous_source_sha256": null,
+      "sha256": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540"
+    }
+  },
+  "configuration": {
+    "sha256": "679ea6737e406abbda976fcff381db38d0c3da8e1ff1a5533600419c0de0ff96",
+    "schema_version": 1,
+    "validated": true,
+    "stream_enabled": false,
+    "stream_representation": null,
+    "stream_destination": null,
+    "stream_id": null,
+    "stream_passphrase": null,
+    "opus_bitrate_bps": 128000,
+    "recording_directory": "/var/lib/tinypirelay/recordings",
+    "recording_rotation_seconds": 3600,
+    "recording_mount": "/",
+    "monitoring_rate_hz": 5,
+    "spectrum_bands": 64,
+    "credential_file_sha256": "0a29a5dbcb592d5b2aea4bd4b5d1c47468571586e4abbe00cfc31b0f16e86287",
+    "credential_content_retained": false,
+    "web_username_retained": false,
+    "password_retained": false
+  },
+  "preflight": {
+    "observed_at_utc": "2026-08-20T14:57:40Z",
+    "initial_boot_id": "177ec369-1c45-4fba-bdbf-2ee6efdf1c10",
+    "root_device": "/dev/mmcblk0p2",
+    "root_filesystem": "ext4",
+    "root_used_percent_rounded": 3,
+    "memory_available_bytes": 337846272,
+    "temperature_c": 39.008,
+    "throttled_hex": "0x0",
+    "dashboard_port_8080_free": true,
+    "installed_package_count": 849,
+    "package_manifest_sha256_before": "0ac57f1d4fd0bb69bcabcfd84512d389a6ad1188a84e7e75ebd8a1ce0a4da245",
+    "package_manifest_sha256_after": "0ac57f1d4fd0bb69bcabcfd84512d389a6ad1188a84e7e75ebd8a1ce0a4da245",
+    "apt_simulation": {
+      "upgraded": 0,
+      "newly_installed": 0,
+      "removed": 0,
+      "not_upgraded": 82
+    },
+    "required_packages_already_installed": true,
+    "gstreamer_libav_installed_by_step4": false,
+    "managed_services_present_before": false,
+    "managed_accounts_present_before": false,
+    "managed_paths_present_before": false,
+    "read_only_plan": {
+      "version": "0.4.0-dev",
+      "mode": "install",
+      "preflight_errors": [],
+      "package_transaction_empty": true
+    }
+  },
+  "pre_mutation_regressions": {
+    "initial_archive": {
+      "sha256": "949d6e1560edc2cfdcb034f1adb9b77822c5c91045da4e2e1174bf37ce936bd3",
+      "size_bytes": 347239,
+      "tar_members": 119,
+      "payload_sha256": "d29cf0320f74806a1ffb49f50f9fd1b35e3e23258e35528061079b290d152361"
+    },
+    "tty_failure": {
+      "apply_reached_credential_prompt": true,
+      "installation_mutation_occurred": false,
+      "observed_error": "a controlling /dev/tty is required; use an inherited --credential-fd for automation",
+      "root_cause": "Python 3.13 rejected a combined read/write text wrapper over the non-seekable terminal even though the inherited PTY and raw /dev/tty open were valid.",
+      "diagnostic_detail": "os.fdopen(descriptor, 'r+', encoding='utf-8', buffering=1) raised io.UnsupportedOperation: File or stream is not seekable",
+      "fix": "Use distinct read and write terminal descriptors, flush the prompt explicitly, and open with O_NOCTTY and O_CLOEXEC where available.",
+      "focused_pi_regression_tests": {
+        "tests": 2,
+        "passed": 2,
+        "elapsed_seconds": 1.661
+      }
+    },
+    "superseded_tty_fix_archive": {
+      "sha256": "9b5fb45cce77e23793de4642e3be10517346f71f2f6982bb2dcab0bd0317f7cb",
+      "size_bytes": 347721,
+      "tar_members": 119,
+      "installed": false,
+      "reason_superseded": "The PTY regression established that O_NOCTTY was also required before the final artifact was frozen."
+    },
+    "weak_password_rejection": {
+      "minimum_characters": 12,
+      "rejected": true,
+      "installation_mutation_occurred": false,
+      "secret_retained": false
+    },
+    "post_failure_state": {
+      "package_manifest_unchanged": true,
+      "managed_services_present": false,
+      "managed_accounts_present": false,
+      "managed_paths_present": false
+    }
+  },
+  "source_validation": {
+    "pi": {
+      "python": "3.13.5",
+      "tests_discovered": 333,
+      "tests_passed": 332,
+      "expected_skips": 1,
+      "skip_reason": "Node.js absent for the static-asset check",
+      "elapsed_seconds": 187.106,
+      "result": "pass"
+    },
+    "windows": {
+      "tests_discovered": 333,
+      "expected_platform_skips": 18,
+      "elapsed_seconds": 33.791,
+      "result": "pass"
+    },
+    "network_disabled_alpine": {
+      "tests_discovered": 333,
+      "tests_passed": 332,
+      "expected_skips": 1,
+      "elapsed_seconds": 60.821,
+      "result": "pass"
+    }
+  },
+  "installation": {
+    "result": "pass",
+    "mode": "install",
+    "release_path": "/opt/tinypirelay/releases/0.4.0-dev",
+    "current_link_target": "releases/0.4.0-dev",
+    "release_payload_matches_approved_sha256": true,
+    "configuration_installed": true,
+    "credential_created_without_plaintext_logging": true,
+    "services_installed": [
+      "tinypirelay-media.service",
+      "tinypirelay-web.service"
+    ],
+    "services_enabled": true,
+    "services_started": true,
+    "initial_capture_running": true,
+    "initial_stream_stopped_by_configuration": true,
+    "diagnostics_healthy": true
+  },
+  "least_privilege": {
+    "result": "pass",
+    "media_identity": {
+      "uid": 984,
+      "primary_gid": 984,
+      "audio_group_member": true,
+      "control_group_member": true
+    },
+    "web_identity": {
+      "uid": 983,
+      "primary_gid": 983,
+      "audio_group_member": false,
+      "control_group_member": true
+    },
+    "control_group_gid": 985,
+    "cross_identity_private_file_reads_denied": true,
+    "paths": {
+      "/etc/tinypirelay/media/config.json": {
+        "owner": "tinypirelay-media",
+        "group": "tinypirelay-control",
+        "mode": "0600",
+        "safe": true
+      },
+      "/etc/tinypirelay/web/credential.json": {
+        "owner": "tinypirelay-web",
+        "group": "tinypirelay-web",
+        "mode": "0600",
+        "safe": true
+      },
+      "/run/tinypirelay/control.sock": {
+        "owner": "tinypirelay-media",
+        "group": "tinypirelay-control",
+        "mode": "0660",
+        "safe": true
+      }
+    },
+    "systemd_security_exposure": {
+      "tinypirelay-media.service": {
+        "score": 3.3,
+        "rating": "OK"
+      },
+      "tinypirelay-web.service": {
+        "score": 2.9,
+        "rating": "OK"
+      }
+    },
+    "web_listener": "127.0.0.1:8080"
+  },
+  "scenarios": {
+    "fresh_install": {
+      "status": "pass",
+      "hardware_tested": true,
+      "package_preflight_passed": true,
+      "immutable_release_activated": true,
+      "two_services_running": true,
+      "capture_running": true
+    },
+    "repeat_install": {
+      "status": "pass",
+      "hardware_tested": true,
+      "plan_mode": "noop",
+      "planned_changes": [],
+      "preflight_errors": [],
+      "credential_prompt_repeated": false,
+      "media_pid_before_and_after": 3437,
+      "web_pid_before_and_after": 3438,
+      "service_restart_counts": 0,
+      "release_identity_unchanged": true,
+      "file_timestamps_unchanged": true,
+      "install_state_sha256_before": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540",
+      "install_state_sha256_after": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540",
+      "configuration_sha256_before": "679ea6737e406abbda976fcff381db38d0c3da8e1ff1a5533600419c0de0ff96",
+      "configuration_sha256_after": "679ea6737e406abbda976fcff381db38d0c3da8e1ff1a5533600419c0de0ff96",
+      "credential_sha256_before": "0a29a5dbcb592d5b2aea4bd4b5d1c47468571586e4abbe00cfc31b0f16e86287",
+      "credential_sha256_after": "0a29a5dbcb592d5b2aea4bd4b5d1c47468571586e4abbe00cfc31b0f16e86287"
+    },
+    "authenticated_loopback_dashboard": {
+      "status": "pass",
+      "hardware_tested": true,
+      "ssh_tunnel_local_port": 18080,
+      "target_loopback_port": 8080,
+      "login_succeeded": true,
+      "live_meter_observed": true,
+      "numeric_spectrum_observed_in_diagnostics": true,
+      "credentials_retained": false
+    },
+    "web_restart_isolation": {
+      "status": "pass",
+      "hardware_tested": true,
+      "media_pid_before": 3437,
+      "media_pid_after": 3437,
+      "web_pid_before": 3438,
+      "web_pid_after": 5162,
+      "capture_generation_before": 1,
+      "capture_generation_after": 1,
+      "capture_remained_running": true,
+      "dashboard_recovered": true,
+      "errors_observed": false
+    },
+    "recording": {
+      "status": "pass",
+      "hardware_tested": true,
+      "state_sequence_observed": [
+        "running",
+        "stopping",
+        "stopped"
+      ],
+      "capture_remained_running": true,
+      "finalized_file": "/var/lib/tinypirelay/recordings/tinypirelay-20260820T160654.758798Z.flac",
+      "size_bytes": 1511181,
+      "mode": "0600",
+      "owner": "tinypirelay-media",
+      "group": "tinypirelay-control",
+      "approximate_duration_seconds": 62,
+      "sha256": "71109b89b40940d3d904877207461566d03be484576d4319fb482a61a6962a41",
+      "decode_tool": "gst-launch-1.0",
+      "decode_pipeline": "filesrc ! flacparse ! flacdec ! fakesink",
+      "decode_to_end_of_stream": true,
+      "decode_exit_code": 0
+    },
+    "reboot_recovery": {
+      "status": "pass",
+      "hardware_tested": true,
+      "retained_pre_reboot_observation": {
+        "observed_at_utc": "2026-08-20T18:16:02Z",
+        "boot_id": "44dd7ebe-40f8-4454-bfdd-867d7bf4fa11",
+        "media_pid": 817,
+        "web_pid": 480,
+        "media_restarts": 0,
+        "web_restarts": 0,
+        "alsa_state": "RUNNING",
+        "alsa_owner_pid": 817,
+        "alsa_hw_ptr": 223528896
+      },
+      "post_reboot_observation": {
+        "boot_id": "dd5a1116-5966-4542-8903-8c7c7e06bc5a",
+        "media_pid": 816,
+        "web_pid": 478,
+        "media_restarts": 0,
+        "web_restarts": 0,
+        "services_enabled_active_running": true,
+        "capture_generation": 1,
+        "capture_running": true,
+        "dashboard_http_status": 200,
+        "stability_observation_seconds": 30,
+        "alsa_hw_ptr_start": 1271088,
+        "alsa_hw_ptr_end": 5251056,
+        "media_rss_mib_approx": 28.8,
+        "web_rss_mib_approx": 19.5,
+        "temperature_c_range": [
+          41,
+          42
+        ],
+        "throttled_hex": "0x0",
+        "warning_or_error_journal_entries": 0
+      },
+      "install_state_preserved": true,
+      "configuration_sha256_preserved": true,
+      "credential_sha256_preserved": true,
+      "recording_sha256_preserved": true,
+      "boot_history_caveat": "The initial preflight boot ID differed from the retained immediately adjacent pre/post reboot pair. The cause and timing of the intervening transition were not retained, so this artifact does not claim exactly one reboot across the whole validation session."
+    }
+  },
+  "closing_post_reboot_snapshot": {
+    "observed_at_utc": "2026-08-20T18:28:58Z",
+    "boot_id": "dd5a1116-5966-4542-8903-8c7c7e06bc5a",
+    "services": {
+      "media": {
+        "pid": 816,
+        "active": true,
+        "running": true,
+        "enabled": true,
+        "restarts": 0,
+        "rss_kib": 28984
+      },
+      "web": {
+        "pid": 478,
+        "active": true,
+        "running": true,
+        "enabled": true,
+        "restarts": 0,
+        "rss_kib": 19532
+      }
+    },
+    "alsa": {
+      "state": "RUNNING",
+      "owner_pid": 816,
+      "hw_ptr_before": 30362832,
+      "hw_ptr_after_approximately_3_seconds": 30509040
+    },
+    "loopback_http_status": 200,
+    "temperature_c": 39.0,
+    "throttled_hex": "0x0",
+    "warning_or_higher_journal_entries_current_boot": 0,
+    "configuration_sha256": "679ea6737e406abbda976fcff381db38d0c3da8e1ff1a5533600419c0de0ff96",
+    "credential_sha256": "0a29a5dbcb592d5b2aea4bd4b5d1c47468571586e4abbe00cfc31b0f16e86287",
+    "recording_sha256": "71109b89b40940d3d904877207461566d03be484576d4319fb482a61a6962a41"
+  },
+  "retained_remote_artifact_manifest": {
+    "location_classification": "operator-owned validation staging on the target; summarized here and not checked into the repository",
+    "total_size_bytes": 73525,
+    "files": [
+      {
+        "name": "root-diagnostics.json",
+        "size_bytes": 16872,
+        "sha256": "9cd4c083044010a8ec365ac8f767607027d646fa59aec713a45267ccf6484278"
+      },
+      {
+        "name": "root-install-state.json",
+        "size_bytes": 238,
+        "sha256": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540"
+      },
+      {
+        "name": "root-private-sha256.txt",
+        "size_bytes": 204,
+        "sha256": "b3d11e8a9fa17ea6451143dbea291359a1cc80f670a2587fce0192aafa126777"
+      },
+      {
+        "name": "repeat-plan.txt",
+        "size_bytes": 148,
+        "sha256": "118ccf8b7d3163b71f1e22c8be683ac64e7aa23bf2b30b4c4beeab6957fd2f0b"
+      },
+      {
+        "name": "noop-install-state.json",
+        "size_bytes": 238,
+        "sha256": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540"
+      },
+      {
+        "name": "noop-private-sha256.txt",
+        "size_bytes": 204,
+        "sha256": "b3d11e8a9fa17ea6451143dbea291359a1cc80f670a2587fce0192aafa126777"
+      },
+      {
+        "name": "after-web-restart.json",
+        "size_bytes": 16873,
+        "sha256": "fae10b1197830717faa508b8b8ffd0ad3125974b93af10ee4c424419bc339403"
+      },
+      {
+        "name": "after-recording.json",
+        "size_bytes": 20605,
+        "sha256": "1e220ba3077b9e947e84d34639798d1fb200bff66e32a08648b535ec2f970a26"
+      },
+      {
+        "name": "recording-files.txt",
+        "size_bytes": 123,
+        "sha256": "3ce6d659491d0becd866f3b680d9c74eeeea6ba7b5f065132039e251c677088f"
+      },
+      {
+        "name": "recording-sha256.txt",
+        "size_bytes": 139,
+        "sha256": "e6700ce00fd66715a74acb752d0575181b7da4f2615f1e43fd7618b17f59053b"
+      },
+      {
+        "name": "pre-reboot.txt",
+        "size_bytes": 432,
+        "sha256": "da671dc71e0842032315e6c3e25198b6a436e7738f46436494a0cbf84b7b6ace"
+      },
+      {
+        "name": "post-reboot-diagnostics.json",
+        "size_bytes": 16868,
+        "sha256": "a599fa507cdbe42a3b37a2579018a7bc9d564211d7ee1588f56071e23d080761"
+      },
+      {
+        "name": "post-reboot-install-state.json",
+        "size_bytes": 238,
+        "sha256": "96658cff6fac3c7c92d5bd2d3134d98d54c094ae5abdac0db11e119660829540"
+      },
+      {
+        "name": "post-reboot-private-sha256.txt",
+        "size_bytes": 343,
+        "sha256": "cfce9963060469db39a95c59d1d84947f2bbb7f7deb7a541a895568d9059ac45"
+      }
+    ]
+  },
+  "result": {
+    "status": "pass",
+    "checks": {
+      "fresh_install": true,
+      "repeat_install_noop": true,
+      "least_privilege_and_systemd": true,
+      "installed_imm6c_capture": true,
+      "authenticated_loopback_dashboard": true,
+      "web_restart_isolation": true,
+      "finalized_flac_decode": true,
+      "reboot_recovery_and_preservation": true
+    }
+  },
+  "scope_limits": {
+    "physical_upgrade": false,
+    "physical_reverse_version_rollback": false,
+    "physical_uninstall": false,
+    "physical_purge": false,
+    "physical_mid_transaction_interruption_resume": false,
+    "late_audio_return": false,
+    "late_network_return": false,
+    "active_srt": false,
+    "receiver_interoperability": false,
+    "mpeg_ts": false,
+    "smpte_st_302m": false,
+    "gstreamer_libav": false,
+    "endurance": false,
+    "performance_headroom": false,
+    "explanation": "Upgrade, rollback, preservation uninstall, purge, and interruption/resume remain isolated fixture evidence. Late resource return, active SRT, receiver integration, MPEG-TS/ST 302M/libav, endurance, and performance profiling were not exercised by this physical Step 4 run."
+  }
+}

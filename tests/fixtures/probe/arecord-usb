@@ -1,0 +1,8 @@
+**** List of CAPTURE Hardware Devices ****
+card 1: Device [USB Audio Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Codec [I2S Codec], device 1: HiFi Capture [HiFi Capture]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+

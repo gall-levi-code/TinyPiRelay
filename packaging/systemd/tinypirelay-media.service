@@ -1,0 +1,52 @@
+[Unit]
+Description=TinyPiRelay media service
+Wants=sound.target
+After=network.target sound.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=tinypirelay-media
+Group=tinypirelay-control
+SupplementaryGroups=audio
+WorkingDirectory=/opt/tinypirelay/current
+Environment=PYTHONPATH=/opt/tinypirelay/current/src
+Environment=XDG_CACHE_HOME=/var/cache/tinypirelay-media
+Environment=GST_REGISTRY=/var/cache/tinypirelay-media/registry.bin
+ExecStart=/usr/bin/python3 -P -B -m tinypirelay.media_service --config /etc/tinypirelay/media/config.json --evidence /opt/tinypirelay/current/evidence/stream_compatibility.json --audio-capabilities /opt/tinypirelay/current/evidence/audio_capabilities.json --control-socket /run/tinypirelay/control.sock
+Restart=on-failure
+RestartSec=5s
+RestartPreventExitStatus=2
+TimeoutStopSec=20s
+RuntimeDirectory=tinypirelay
+RuntimeDirectoryMode=0750
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/etc/tinypirelay/media
+DevicePolicy=closed
+DeviceAllow=char-alsa rw
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+LockPersonality=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+SystemCallArchitectures=native
+TasksMax=128
+LimitNOFILE=1024
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=200
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "capture": {
+    "device_id": null,
+    "mode": null
+  },
+  "stream": {
+    "enabled": false,
+    "representation_id": null,
+    "destination_host": null,
+    "destination_port": null,
+    "latency_ms": 125,
+    "stream_id": null,
+    "passphrase": null,
+    "opus_bitrate_bps": 128000
+  },
+  "recording": {
+    "directory": "/var/lib/tinypirelay/recordings",
+    "rotation_seconds": 3600,
+    "required_mountpoint": "/"
+  },
+  "monitoring": {
+    "spectrum_updates_per_second": 5,
+    "spectrum_bands": 512
+  }
+}

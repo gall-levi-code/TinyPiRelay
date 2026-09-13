@@ -1,0 +1,411 @@
+{
+  "actions": [],
+  "audio": {
+    "capture_devices": [
+      {
+        "alsa_id": "hw:0,0",
+        "card": 0,
+        "card_id": "iMM6C",
+        "card_name": "iMM-6C",
+        "device": 0,
+        "device_id": "USB Audio",
+        "device_name": "USB Audio"
+      }
+    ],
+    "reason": null,
+    "status": "present",
+    "tool": "arecord"
+  },
+  "gstreamer": {
+    "plugins": {
+      "alsa": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "audioconvert": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "audioparsers": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "audioresample": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "audiotestsrc": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "coreelements": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "flac": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "level": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "matroska": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "opus": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "opusparse": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "spectrum": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "srt": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      }
+    },
+    "registry_update_disabled": true,
+    "required_elements": {
+      "alsasrc": {
+        "availability_status": "present",
+        "plugin": "alsa",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "audioconvert": {
+        "availability_status": "present",
+        "plugin": "audioconvert",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "audioresample": {
+        "availability_status": "present",
+        "plugin": "audioresample",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "capsfilter": {
+        "availability_status": "present",
+        "plugin": "coreelements",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "flacenc": {
+        "availability_status": "present",
+        "plugin": "flac",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "level": {
+        "availability_status": "present",
+        "plugin": "level",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "opusenc": {
+        "availability_status": "present",
+        "plugin": "opus",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "queue": {
+        "availability_status": "present",
+        "plugin": "coreelements",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "spectrum": {
+        "availability_status": "present",
+        "plugin": "spectrum",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "srtsink": {
+        "availability_status": "present",
+        "plugin": "srt",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "tee": {
+        "availability_status": "present",
+        "plugin": "coreelements",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      }
+    },
+    "required_status": {
+      "status": "present"
+    },
+    "spike_elements": {
+      "audiotestsrc": {
+        "availability_status": "present",
+        "plugin": "audiotestsrc",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "fakesink": {
+        "availability_status": "present",
+        "plugin": "coreelements",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "flacdec": {
+        "availability_status": "present",
+        "plugin": "flac",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "flacparse": {
+        "availability_status": "present",
+        "plugin": "audioparsers",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "identity": {
+        "availability_status": "present",
+        "plugin": "coreelements",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "matroskademux": {
+        "availability_status": "present",
+        "plugin": "matroska",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "matroskamux": {
+        "availability_status": "present",
+        "plugin": "matroska",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "opusdec": {
+        "availability_status": "present",
+        "plugin": "opus",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "opusparse": {
+        "availability_status": "present",
+        "plugin": "opusparse",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      },
+      "srtsrc": {
+        "availability_status": "present",
+        "plugin": "srt",
+        "plugin_version": "1.26.2",
+        "reason": null,
+        "status": "present"
+      }
+    },
+    "spike_status": {
+      "status": "present"
+    },
+    "status": "present",
+    "tools": {
+      "gst-inspect-1.0": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      },
+      "gst-launch-1.0": {
+        "reason": null,
+        "status": "present",
+        "version": "1.26.2"
+      }
+    },
+    "tools_status": {
+      "status": "present"
+    }
+  },
+  "hardware": {
+    "board": {
+      "model": "Raspberry Pi Zero W Rev 1.1",
+      "model_source": "/proc/device-tree/model",
+      "reason": null,
+      "revision": "9000c1",
+      "revision_source": "/proc/cpuinfo",
+      "status": "present"
+    },
+    "cpu": {
+      "hardware": "BCM2835",
+      "logical_cpus": 1,
+      "model": "ARMv6-compatible processor rev 7 (v6l)",
+      "reason": null,
+      "status": "present"
+    },
+    "memory": {
+      "reason": null,
+      "status": "present",
+      "total_bytes": 447647744
+    },
+    "status": "present"
+  },
+  "packages": {
+    "items": {
+      "alsa-utils": {
+        "candidate_version": "1.2.14-1+rpt1",
+        "installed": true,
+        "installed_version": "1.2.14-1+rpt1",
+        "reason": null,
+        "status": "present"
+      },
+      "gir1.2-gst-plugins-base-1.0": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": true,
+        "installed_version": "1.26.2-1+rpt3+deb13u1",
+        "reason": null,
+        "status": "present"
+      },
+      "gir1.2-gstreamer-1.0": {
+        "candidate_version": "1.26.2-2",
+        "installed": true,
+        "installed_version": "1.26.2-2",
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-alsa": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": true,
+        "installed_version": "1.26.2-1+rpt3+deb13u1",
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-bad": {
+        "candidate_version": "1.26.2-3+rpt3+deb13u2",
+        "installed": true,
+        "installed_version": "1.26.2-3+rpt3+deb13u2",
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-base": {
+        "candidate_version": "1.26.2-1+rpt3+deb13u1",
+        "installed": true,
+        "installed_version": "1.26.2-1+rpt3+deb13u1",
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-plugins-good": {
+        "candidate_version": "1.26.2-1+deb13u2",
+        "installed": true,
+        "installed_version": "1.26.2-1+deb13u2",
+        "reason": null,
+        "status": "present"
+      },
+      "gstreamer1.0-tools": {
+        "candidate_version": "1.26.2-2",
+        "installed": true,
+        "installed_version": "1.26.2-2",
+        "reason": null,
+        "status": "present"
+      },
+      "libgstreamer1.0-0": {
+        "candidate_version": "1.26.2-2",
+        "installed": true,
+        "installed_version": "1.26.2-2",
+        "reason": null,
+        "status": "present"
+      },
+      "python3": {
+        "candidate_version": "3.13.5-1",
+        "installed": true,
+        "installed_version": "3.13.5-1",
+        "reason": null,
+        "status": "present"
+      },
+      "python3-gi": {
+        "candidate_version": "3.50.0-4",
+        "installed": true,
+        "installed_version": "3.50.0-4",
+        "reason": null,
+        "status": "present"
+      }
+    },
+    "manager": "apt",
+    "reason": null,
+    "status": "present"
+  },
+  "platform": {
+    "dpkg_architecture": {
+      "reason": null,
+      "status": "present",
+      "value": "armhf"
+    },
+    "kernel": {
+      "machine": "armv6l",
+      "reason": null,
+      "release": "6.18.34+rpt-rpi-v6",
+      "status": "present",
+      "system": "Linux"
+    },
+    "os_release": {
+      "id": "raspbian",
+      "name": "Raspbian GNU/Linux",
+      "pretty_name": "Raspbian GNU/Linux 13 (trixie)",
+      "reason": null,
+      "source": "/etc/os-release",
+      "status": "present",
+      "version_codename": "trixie",
+      "version_id": "13"
+    },
+    "status": "present",
+    "userland_bitness": {
+      "bits": 32,
+      "method": "getconf_LONG_BIT",
+      "reason": null,
+      "status": "present"
+    }
+  },
+  "schema_version": 1,
+  "status": "present",
+  "storage": {
+    "free_bytes": 117418110976,
+    "path": "/",
+    "reason": null,
+    "status": "present",
+    "total_bytes": 125296353280,
+    "used_bytes": 2748149760,
+    "used_percent": 2.2
+  }
+}

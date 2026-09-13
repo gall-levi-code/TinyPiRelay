@@ -1,0 +1,15 @@
+[Unit]
+Description=TinyPiRelay restricted maintenance socket
+After=systemd-tmpfiles-setup.service
+
+[Socket]
+ListenStream=/run/tinypirelay-maintenance/control.sock
+SocketUser=root
+SocketGroup=tinypirelay-web
+SocketMode=0660
+DirectoryMode=0750
+RemoveOnStop=true
+Backlog=4
+
+[Install]
+WantedBy=sockets.target

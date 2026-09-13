@@ -1,0 +1,11 @@
+Plugin Details:
+  Name                     coreelements
+  Description              GStreamer core elements
+  Filename                 /usr/lib/arm-linux-gnueabihf/gstreamer-1.0/libgstcoreelements.so
+  Version                  1.22.0
+  License                  LGPL
+  Source module            gstreamer
+  Binary package           GStreamer (Debian)
+  Origin URL               https://tracker.debian.org/pkg/gstreamer1.0
+
+  identity: Identity

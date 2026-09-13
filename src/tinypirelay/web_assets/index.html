@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>TinyPiRelay · Admin console</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></symbol>
+      <symbol id="icon-signal" viewBox="0 0 24 24"><path d="M12 12v9M8 16a6 6 0 1 1 8 0M5 19a10 10 0 1 1 14 0"/><circle cx="12" cy="11" r="2"/></symbol>
+      <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M2 10v4m4-7v10m4-14v18m4-16v14m4-11v8m4-6v4"/></symbol>
+      <symbol id="icon-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></symbol>
+      <symbol id="icon-disk" viewBox="0 0 24 24"><path d="m6 3-3 14v4h18v-4L18 3ZM3 16h18M7 19h1m7 0h2"/></symbol>
+      <symbol id="icon-chip" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9ZM8 2v3m4-3v3m4-3v3M8 19v3m4-3v3m4-3v3M2 8h3m-3 4h3m-3 4h3m14-8h3m-3 4h3m-3 4h3"/></symbol>
+      <symbol id="icon-network" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="m10 8-4 8m8-8 4 8M8 19h8"/></symbol>
+      <symbol id="icon-logs" viewBox="0 0 24 24"><path d="M5 3h14v18H5ZM8 7h2m3 0h3M8 11h8m-8 4h8m-8 3h5"/></symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M9 2h6l.6 3 1.6 1 2.8-1 3 5-2.2 2v2l2.2 2-3 5-2.8-1-1.6 1-.6 3H9l-.6-3-1.6-1L4 21l-3-5 2.2-2v-2L1 10l3-5 2.8 1 1.6-1Z" transform="translate(1 0) scale(.92)"/><circle cx="12" cy="12" r="3.4"/></symbol>
+      <symbol id="icon-thermometer" viewBox="0 0 24 24"><path d="M9 14V5a3 3 0 0 1 6 0v9a5 5 0 1 1-6 0ZM12 7v11m6-11h3m-3 4h2"/><circle cx="12" cy="18" r="1.5"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v7m0-12v1"/></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="5" ry="10"/><path d="M2 12h20M4 6h16M4 18h16"/></symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z"/></symbol>
+      <symbol id="icon-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="1"/></symbol>
+      <symbol id="icon-up" viewBox="0 0 24 24"><path d="M12 21V3m-7 7 7-7 7 7"/></symbol>
+      <symbol id="icon-down" viewBox="0 0 24 24"><path d="M12 3v18m-7-7 7 7 7-7"/></symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+      <symbol id="icon-power" viewBox="0 0 24 24"><path d="M12 2v10M6 5a9 9 0 1 0 12 0"/></symbol>
+      <symbol id="icon-restart" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2 7M20 3v8h-8"/></symbol>
+      <symbol id="logo-mark" viewBox="0 0 80 120">
+        <!-- Original geometric TinyPiRelay artwork, preserved from the approved design. -->
+        <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 24 40 8 72 24 M16 32 40 20 64 32 M24 40 40 32 56 40"/>
+          <path d="M16 45 32 48 38 60 24 57Z M64 45 48 48 42 60 56 57Z"/>
+          <path d="M18 63H62L72 76 63 94 49 110 40 117 31 110 17 94 8 76Z"/>
+          <path d="M40 70 54 78 52 93 40 101 28 93 26 78Z M40 70V85L28 93 M40 85 52 93"/>
+          <path d="M40 63V70 M18 63 26 78 M62 63 54 78 M8 76 26 78 M72 76 54 78 M17 94 28 93 M63 94 52 93 M40 101V117"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main id="main">
+    <section id="login-view" class="login-shell" aria-labelledby="login-heading">
+      <form id="login-form" class="panel login-card">
+        <svg class="login-logo" aria-hidden="true"><use href="#logo-mark"/></svg>
+        <p class="eyebrow">TinyPiRelay · Audio-to-SRT relay</p>
+        <h1 id="login-heading">Sign in</h1>
+        <p id="login-help" class="muted">Use your TinyPiRelay web account.</p>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9_.-]{0,63}">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="1024">
+        <div id="setup-confirm-field" hidden><label for="setup-confirm-password">Confirm password</label><input id="setup-confirm-password" name="confirm_password" type="password" autocomplete="new-password" maxlength="1024" disabled></div>
+        <div id="setup-help" class="login-notes" hidden><p class="help">At least 12 characters.</p><p class="help">Your web account is separate from SSH.</p></div>
+        <div id="setup-transport" class="login-notes" hidden><p class="help">HTTP is not encrypted.</p><p class="help">Use a trusted network or an SSH tunnel.</p></div>
+        <button type="submit" disabled>Sign in</button>
+        <p id="login-message" class="message" role="alert" aria-live="assertive"></p>
+      </form>
+    </section>
+
+    <div id="app-view" class="app" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="TinyPiRelay dashboard">
+          <svg aria-hidden="true"><use href="#logo-mark"/></svg>
+          <strong>TinyPiRelay</strong><small>AUDIO-TO-SRT RELAY</small>
+        </a>
+        <nav class="section-nav" aria-label="Primary">
+          <a href="#dashboard" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-home"/></svg>Dashboard</a>
+          <a href="#stream"><svg class="icon" aria-hidden="true"><use href="#icon-signal"/></svg>Stream</a>
+          <a href="#audio"><svg class="icon" aria-hidden="true"><use href="#icon-wave"/></svg>Audio</a>
+          <a href="#recording"><svg class="icon" aria-hidden="true"><use href="#icon-record"/></svg>Recording</a>
+          <a href="#storage"><svg class="icon" aria-hidden="true"><use href="#icon-disk"/></svg>Storage</a>
+          <a href="#system"><svg class="icon" aria-hidden="true"><use href="#icon-chip"/></svg>System</a>
+          <a href="#network"><svg class="icon" aria-hidden="true"><use href="#icon-network"/></svg>Network</a>
+          <a href="#diagnostics"><svg class="icon" aria-hidden="true"><use href="#icon-logs"/></svg>Logs</a>
+          <a href="#settings"><svg class="icon" aria-hidden="true"><use href="#icon-settings"/></svg>Settings</a>
+          <a href="#about"><svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg>About</a>
+        </nav>
+        <section class="device-card" aria-label="Device">
+          <p class="eyebrow">Device</p><strong id="device-hostname" data-fit>Unavailable</strong>
+          <dl><dt>Model</dt><dd id="device-model" data-fit>—</dd><dt class="sr-only">Operating system</dt><dd id="device-os" data-fit>—</dd><dt>Architecture</dt><dd id="device-architecture" data-fit>—</dd><dt>Version</dt><dd id="software-version" data-fit>—</dd></dl>
+        </section>
+        <span class="sidebar-footer">ADMIN CONSOLE</span>
+      </aside>
+
+      <div class="app-main">
+        <header class="app-header panel">
+          <div class="header-state"><span class="eyebrow">Status</span><p id="header-status" class="status-pill" data-state="unknown" role="status" aria-live="polite">Unavailable</p></div>
+          <div class="header-state"><span class="eyebrow">Recording</span><span id="header-recording-state" class="status-pill" data-state="unknown">Unavailable</span></div>
+          <div class="header-state"><span class="eyebrow">SRT</span><span id="header-connection-state" class="status-pill" data-state="unknown">Unavailable</span></div>
+          <div class="header-actions"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg><span id="system-uptime">—</span><button id="logout-button" class="secondary" type="button">Sign out</button></div>
+        </header>
+        <div class="connection-strip"><p id="global-message" class="message global-message" data-fit role="status" aria-live="polite">Connecting to the device…</p><span id="data-source">AUTHENTICATED CONTROL</span></div>
+
+        <div class="workspace">
+          <section id="dashboard" class="page-section dashboard" data-page="dashboard" aria-label="Live dashboard">
+            <article class="panel spectrum-panel">
+              <div class="panel-heading"><h2 id="dashboard-heading">Live spectrum</h2><span id="spectrum-rate-label" class="tag">—</span><span id="spectrum-channels-label" class="tag">—</span><span id="spectrum-summary" class="muted" data-fit>Waiting for telemetry</span></div>
+              <div class="spectrum-frame"><canvas id="spectrum-canvas" width="640" height="400" tabindex="0" aria-label="Live scrolling audio spectrogram with adjustable frequency axis" aria-describedby="spectrum-gesture-help"></canvas></div>
+              <div class="spectrum-footer"><span id="spectrum-gesture-help" data-fit>Hz axis: wheel to zoom · drag to pan · double-click to reset</span><a id="analysis-link" href="#audio">Analysis settings ↗</a></div>
+            </article>
+            <article class="panel levels-panel">
+              <div class="panel-heading"><h2>Audio levels</h2><span class="tag">dBFS</span></div>
+              <canvas id="level-canvas" width="180" height="400" aria-label="Live per-channel audio levels"></canvas>
+              <ul id="level-values" class="meter-values" aria-label="Numeric channel levels"></ul>
+              <p id="signal-summary" class="meter-summary muted" data-fit>Waiting for telemetry</p>
+            </article>
+            <article class="panel system-panel">
+              <div class="panel-heading"><h2>System</h2><a class="quiet-link" href="#system" aria-label="Open system details">↗</a></div>
+              <div class="resource-stat"><svg class="icon" aria-hidden="true"><use href="#icon-chip"/></svg><div><small>CPU</small><strong id="system-cpu">—</strong></div><canvas id="cpu-history" class="history" width="100" height="30" aria-label="CPU usage history"></canvas></div>
+              <div class="resource-stat"><svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg><div><small>Temperature</small><strong id="system-temperature">—</strong></div><canvas id="temperature-history" class="history" width="100" height="30" aria-label="Temperature history"></canvas></div>
+              <div class="compact-stat"><span>Load</span><span id="system-load">—</span></div>
+              <div class="compact-stat"><span>Memory</span><span id="system-memory">—</span></div>
+            </article>
+            <article class="panel storage-panel">
+              <div class="panel-heading"><h2>Storage</h2><span id="storage-state" class="tag" data-fit>Unavailable</span></div>
+              <div class="storage-content">
+                <div class="storage-ring">
+                  <svg viewBox="0 0 112 112" aria-hidden="true"><circle class="ring-track" cx="56" cy="56" r="50"/><circle id="storage-ring-progress" class="ring-progress" cx="56" cy="56" r="50" pathLength="100" stroke-dasharray="0 100"/></svg>
+                  <strong id="storage-percent">—</strong><small id="storage-capacity" data-fit>Unavailable</small><small>USED</small>
+                </div>
+                <dl class="storage-stats"><dt>Recordings</dt><dd id="storage-recordings" data-fit>—</dd><dt>Free space</dt><dd id="storage-free" data-fit>—</dd><dt>Filesystem</dt><dd id="storage-filesystem" data-fit>—</dd></dl>
+                <div class="disk-activity"><div class="activity-heading"><span>Disk activity</span><span>60s</span></div><div class="disk-rates"><span>Read <b id="storage-read">—</b></span><span>Write <b id="storage-write">—</b></span></div><canvas id="disk-history" width="240" height="70" aria-label="Disk read and write throughput history"></canvas><div class="activity-heading"><span>Est. to 90%</span><span id="storage-eta" data-fit>Unavailable</span></div></div>
+              </div>
+              <div class="storage-scale"><div id="storage-usage" class="capacity-track" role="img" aria-label="Recording filesystem usage unavailable"></div><span class="storage-limit">90% LIMIT</span></div>
+              <div class="scale-labels"><span>0%</span><span>RECORDING FILESYSTEM</span><span>100%</span></div>
+            </article>
+            <article class="panel network-panel">
+              <div class="panel-heading"><h2>Network</h2><a class="quiet-link" href="#network" aria-label="Open network details">↗</a></div>
+              <dl><dt>Interface</dt><dd id="network-interface" data-fit>—</dd><dt>Address</dt><dd id="network-address" data-fit>—</dd><dt>Receiver</dt><dd id="network-receiver" data-fit>—</dd><dt>Link</dt><dd id="network-link" data-fit>—</dd></dl>
+              <div class="network-activity"><div class="traffic-rates"><span><svg class="icon" aria-hidden="true"><use href="#icon-up"/></svg><b id="network-tx">—</b></span><span><svg class="icon" aria-hidden="true"><use href="#icon-down"/></svg><b id="network-rx">—</b></span></div><canvas id="network-history" width="100" height="45" aria-label="Interface transmit and receive throughput history"></canvas></div>
+              <p class="panel-note">Interface traffic · 60s history</p>
+            </article>
+            <div class="right-stack">
+              <article class="panel srt-panel">
+                <div class="panel-heading"><h2>SRT connection</h2><span id="connection-state" class="tag">Unavailable</span></div>
+                <div class="info-body"><div class="globe"><svg class="icon" aria-hidden="true"><use href="#icon-globe"/></svg></div><dl><dt>Mode</dt><dd>Caller</dd><dt>Host</dt><dd id="srt-host" data-fit>—</dd><dt>Port</dt><dd id="srt-port">—</dd><dt>Latency</dt><dd id="srt-latency-value">—</dd><dt>Encryption</dt><dd id="srt-encryption" data-fit>—</dd><dt>Format</dt><dd id="srt-representation" data-fit>—</dd></dl></div>
+                <div class="srt-metrics"><div><small>TX rate</small><strong id="srt-tx">—</strong></div><div><small>RTT</small><strong id="srt-rtt">—</strong></div><div><small>Retransmits</small><strong id="srt-retransmits">—</strong></div></div>
+                <div class="card-actions"><button id="dashboard-stream-toggle" type="button" data-action="stream.start" data-toggle="stream"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span class="action-label">Start stream</span></button><a class="button secondary" href="#stream"><svg class="icon" aria-hidden="true"><use href="#icon-settings"/></svg><span class="action-label">SRT settings</span></a></div>
+                <span id="stream-state" class="sr-only">Unavailable</span>
+              </article>
+              <article class="panel recording-panel">
+                <div class="panel-heading"><h2>Recording</h2><span id="recording-state" class="tag">Unavailable</span></div>
+                <div class="info-body"><div class="record-symbol" aria-hidden="true"></div><dl><dt>Format</dt><dd id="recording-format">FLAC</dd><dt>Sample rate</dt><dd id="recording-rate">—</dd><dt>Channels</dt><dd id="recording-channels">—</dd><dt title="Elapsed wall time for this fragment, not decoded audio duration">Elapsed</dt><dd id="recording-duration">—</dd><dt>Size</dt><dd id="recording-size">—</dd></dl></div>
+                <p class="recording-filename"><span id="recording-file-label">File</span><span id="recording-file" data-fit>—</span></p>
+                <div class="card-actions"><button id="dashboard-recording-toggle" type="button" data-action="recording.start" data-toggle="recording"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg><span class="action-label">Start recording</span></button><a class="button secondary" href="#recording"><svg class="icon" aria-hidden="true"><use href="#icon-settings"/></svg><span class="action-label">Recording settings</span></a></div>
+              </article>
+              <article class="panel audio-device-panel">
+                <div class="panel-heading"><h2>Audio device</h2><span id="capture-state" class="tag">Unavailable</span></div>
+                <div class="info-body"><svg class="icon audio-wave" aria-hidden="true"><use href="#icon-wave"/></svg><dl><dt>Device</dt><dd id="audio-device-name" data-fit>—</dd><dt>Input</dt><dd id="audio-input" data-fit>—</dd><dt>Capture</dt><dd id="audio-capture" data-fit>—</dd><dt>Output</dt><dd id="audio-output" data-fit>—</dd></dl></div>
+                <span id="service-state" class="sr-only">Unavailable</span>
+              </article>
+            </div>
+          </section>
+
+          <form id="config-form">
+            <section id="audio" class="page-section settings-page" data-page="audio" hidden aria-labelledby="audio-heading">
+              <div class="section-heading"><div><p class="eyebrow">Input &amp; monitoring</p><h1 id="audio-heading">Audio</h1></div><div class="button-row"><button type="button" data-action="capture.start"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg>Start capture</button><button type="button" class="danger" data-action="capture.stop" data-confirm="Stop capture? Streaming, recording, and monitoring will stop."><svg class="icon" aria-hidden="true"><use href="#icon-stop"/></svg>Stop capture</button></div></div>
+              <div class="settings-grid audio-settings-grid">
+                <fieldset class="panel"><legend>Capture device</legend><div class="field"><label for="capture-device">Audio input</label><select id="capture-device"></select><p id="audio-discovery-status" class="help" data-fit>Audio setup is optional during installation.</p><button id="audio-refresh" type="button" class="secondary inline-action">Refresh audio inputs</button></div><div class="field"><label for="capture-mode">Capture mode</label><select id="capture-mode"></select><p id="capture-mode-help" class="help" data-fit>Choose one validated device mode.</p></div><p class="settings-note" data-fit>Save your selection, then restart media to apply it.</p></fieldset>
+                <fieldset class="panel"><legend>Live analysis</legend><div class="field"><label for="spectrum-rate">Spectrum updates per second</label><input id="spectrum-rate" type="number" min="0" max="60" step="any" inputmode="decimal" required></div><div class="field"><label for="spectrum-bands">Spectrum bands</label><input id="spectrum-bands" type="number" min="64" max="2048" step="1" inputmode="numeric" required></div><p class="settings-note">Use 0 updates per second to disable spectrum analysis.</p><p class="help">Meters use at least 5 Hz and show measured channels.</p><p class="help">No simulated stereo or extra microphone resolution.</p></fieldset>
+                <article class="panel spectrum-view-panel" aria-labelledby="spectrum-view-heading">
+                  <h2 id="spectrum-view-heading">Spectrogram view</h2>
+                  <div class="field"><label for="spectrum-min-hz">Lower frequency (Hz)</label><input id="spectrum-min-hz" form="" type="number" min="20" max="23990" step="any" inputmode="decimal" value="20" aria-describedby="spectrum-view-message"></div>
+                  <div class="field"><label for="spectrum-max-hz">Upper frequency (Hz)</label><input id="spectrum-max-hz" form="" type="number" min="30" max="24000" step="any" inputmode="decimal" value="24000" aria-describedby="spectrum-view-message"></div>
+                  <div class="button-row"><button id="spectrum-view-reset" form="" class="secondary" type="button">Full range</button><a class="button" href="#dashboard">View spectrum ↗</a></div>
+                  <div class="preference-fields"><div class="field"><label for="spectrum-palette">Spectrum colors</label><select id="spectrum-palette" form=""><option value="classic">Classic heat</option><option value="ocean">Ocean cyan</option><option value="ember">Ember</option><option value="gray">Grayscale</option></select></div><div class="field"><label for="meter-palette">Meter colors</label><select id="meter-palette" form=""><option value="classic">Green / amber / red</option><option value="cyan">Cyan / amber / red</option><option value="mono">White / amber / red</option></select></div></div>
+                  <p id="spectrum-view-message" class="help" data-fit role="status">Display only · changes apply immediately in this tab.</p>
+                  <dl class="feature-list"><dt>Time window</dt><dd>30 seconds · linear</dd><dt>Preferences</dt><dd>This browser · remembered</dd></dl>
+                  <p class="settings-note" data-fit>Wheel over the Hz axis to zoom; drag to pan.</p>
+                  <p class="help" data-fit>Double-click the axis or choose Full range to reset.</p>
+                  <p class="help" data-fit>Zoom changes the view, not the microphone or FFT resolution.</p>
+                </article>
+              </div>
+            </section>
+            <section id="stream" class="page-section settings-page" data-page="stream" hidden aria-labelledby="stream-heading">
+              <div class="section-heading"><div><p class="eyebrow">SRT caller</p><h1 id="stream-heading">Stream settings</h1></div><div class="button-row"><button type="button" data-action="stream.start"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg>Start stream</button><button type="button" class="danger" data-action="stream.stop" data-confirm="Stop the active SRT stream? Capture and recording will continue."><svg class="icon" aria-hidden="true"><use href="#icon-stop"/></svg>Stop stream</button></div></div>
+              <div class="settings-grid stream-settings-grid">
+                <fieldset class="panel"><legend>Destination</legend><div class="field"><label for="destination-host">Host</label><input id="destination-host" type="text" autocomplete="off" maxlength="253" required></div><div class="field"><label for="destination-port">Port</label><input id="destination-port" type="number" min="1" max="65535" step="1" inputmode="numeric" required></div><div class="field"><label for="stream-id">Stream ID <span class="optional">optional</span></label><input id="stream-id" type="text" autocomplete="off" maxlength="512" aria-describedby="stream-id-help"><p id="stream-id-help" class="help">Routing interoperability is not yet verified.</p></div><div class="checkbox-field"><input id="stream-enabled" type="checkbox"><label for="stream-enabled">Start with the media service</label></div></fieldset>
+                <fieldset class="panel"><legend>Audio format</legend><div class="field"><label for="stream-representation">Representation</label><select id="stream-representation" required></select><p id="representation-help" class="help" data-fit>Only evidence-approved combinations are shown.</p></div><div id="opus-bitrate-field" class="field" hidden><label for="opus-bitrate">Opus bitrate</label><select id="opus-bitrate"></select><button id="apply-opus-bitrate" class="secondary inline-action" type="button" data-action="stream.set_opus_bitrate">Apply bitrate live</button></div><p class="settings-note">Format changes can affect capture and recording.</p><p class="help">Saved settings may require a media-process restart.</p></fieldset>
+                <fieldset class="panel"><legend>SRT transport</legend><div class="field"><label for="srt-latency">Latency (ms)</label><input id="srt-latency" type="number" min="20" max="8000" step="1" inputmode="numeric" required></div><div class="field"><label for="srt-passphrase">Passphrase <span class="optional">optional</span></label><input id="srt-passphrase" type="password" autocomplete="new-password" minlength="10" maxlength="79" pattern="[ -~]{10,79}" aria-describedby="passphrase-help"><p id="passphrase-help" class="help" data-fit>Leave blank to retain the stored passphrase.</p></div><div class="checkbox-field"><input id="passphrase-clear" type="checkbox"><label for="passphrase-clear">Clear stored passphrase</label></div><p class="settings-note">New passphrases: 10–79 printable ASCII characters.</p><p class="help">Encrypted SRT interoperability is not yet verified.</p></fieldset>
+              </div>
+            </section>
+            <section id="recording" class="page-section settings-page" data-page="recording" hidden aria-labelledby="recording-heading">
+              <div class="section-heading"><div><p class="eyebrow">Local lossless audio</p><h1 id="recording-heading">Recording settings</h1></div><div class="button-row"><button type="button" data-action="recording.start"><svg class="icon" aria-hidden="true"><use href="#icon-play"/></svg>Start recording</button><button type="button" class="danger" data-action="recording.stop" data-confirm="Stop and finalize the active recording? Capture and streaming will continue."><svg class="icon" aria-hidden="true"><use href="#icon-stop"/></svg>Stop recording</button></div></div>
+              <div class="settings-grid recording-settings-grid"><fieldset class="panel"><legend>Destination</legend><div class="field"><label for="recording-directory">Recording directory</label><input id="recording-directory" type="text" autocomplete="off" maxlength="2048" required></div><div class="field"><label for="required-mountpoint">Required mountpoint <span class="optional">optional</span></label><input id="required-mountpoint" type="text" autocomplete="off" maxlength="2048"></div><p class="settings-note">Stop recording before changing its configuration.</p></fieldset><fieldset class="panel"><legend>Rotation &amp; protection</legend><div class="field"><label for="rotation-seconds">Rotation interval (seconds)</label><input id="rotation-seconds" type="number" min="60" max="2678400" step="1" inputmode="numeric" required></div><dl class="feature-list"><dt>Recording format</dt><dd>Native FLAC</dd><dt>Filesystem cutoff</dt><dd>90% used</dd><dt>Rotation</dt><dd>While recording</dd></dl><p class="settings-note">Normal stop finalizes the file; power-loss recovery is not guaranteed.</p></fieldset></div>
+            </section>
+          </form>
+
+          <section id="storage" class="page-section settings-page" data-page="storage" hidden aria-labelledby="storage-heading">
+            <div class="section-heading"><div><p class="eyebrow">Original lossless files</p><h1 id="storage-heading">Recording library</h1></div><div class="button-row"><button id="storage-refresh" type="button" class="secondary">Refresh files</button><a class="button secondary" href="#recording">Recording settings</a></div></div>
+            <div class="metric-strip"><div class="panel"><small>Used</small><strong id="library-used">—</strong></div><div class="panel"><small>Available</small><strong id="library-free">—</strong></div><div class="panel"><small>Recordings</small><strong id="library-count">—</strong></div><div class="panel"><small>Filesystem</small><strong id="library-filesystem">—</strong></div></div>
+            <article class="panel library-panel"><div class="panel-heading"><h2>Files</h2><span id="library-message" data-fit role="status">Open the library to load files.</span></div><div class="file-table-heading"><span>Recording</span><span>Duration</span><span>Size</span><span>State</span><span>Actions</span></div><ol id="file-list" class="file-list"></ol><nav id="storage-pagination" class="number-pagination" aria-label="Recording pages"></nav></article>
+            <article class="panel playback-panel"><div class="panel-heading"><h2>Playback</h2><span id="playback-name" data-fit>No recording selected</span></div><audio id="recording-player" controls preload="none" aria-label="Recording playback and seeking"></audio><p id="playback-message" class="help" data-fit>FLAC · playback and seeking use your browser; no Pi transcoding.</p><p class="help" data-fit>Check validates decoding. Recover attempts a separate copy; audio may be missing or contain gaps.</p></article>
+          </section>
+          <section id="system" class="page-section settings-page" data-page="system" hidden aria-labelledby="system-heading">
+            <div class="section-heading"><div><p class="eyebrow">Device-local measurements</p><h1 id="system-heading">System</h1></div><div class="button-row"><button type="button" class="secondary" data-maintenance="system.reboot"><svg class="icon" aria-hidden="true"><use href="#icon-restart"/></svg>Reboot</button><button type="button" class="danger" data-maintenance="system.shutdown"><svg class="icon" aria-hidden="true"><use href="#icon-power"/></svg>Shut down</button></div></div>
+            <div class="resource-grid"><article class="panel metric-chart"><div class="panel-heading"><h2>CPU</h2><strong id="detail-cpu">—</strong></div><canvas id="system-cpu-history" aria-label="CPU history over sixty seconds"></canvas><div class="chart-caption"><span>60 seconds</span><span>0–100%</span></div></article><article class="panel metric-chart"><div class="panel-heading"><h2>Temperature</h2><strong id="detail-temperature">—</strong></div><canvas id="system-temperature-history" aria-label="Temperature history over sixty seconds"></canvas><div class="chart-caption"><span>60 seconds</span><span>0–100°C</span></div></article><article class="panel"><h2>Memory &amp; uptime</h2><strong id="detail-memory" class="hero-number">—</strong><meter id="memory-meter" min="0" max="100" value="0" aria-label="Memory used"></meter><dl class="feature-list"><dt>Used / total</dt><dd id="detail-memory-bytes" data-fit>—</dd><dt>Uptime</dt><dd id="detail-uptime">—</dd><dt>Load average</dt><dd id="detail-load">—</dd></dl></article><article class="panel"><h2>Device &amp; power</h2><dl class="feature-list"><dt>Hostname</dt><dd id="detail-hostname" data-fit>—</dd><dt>Model</dt><dd id="detail-model" data-fit>—</dd><dt>Operating system</dt><dd id="detail-os" data-fit>—</dd><dt>Battery state</dt><dd>Unavailable</dd><dt>Supply warnings</dt><dd>Unavailable</dd></dl><p class="help" data-fit>No battery percentage is inferred from the UPS model.</p><a class="button secondary" href="#settings">Maintenance &amp; security ↗</a></article></div>
+          </section>
+          <section id="network" class="page-section settings-page" data-page="network" hidden aria-labelledby="network-heading">
+            <div class="section-heading"><div><p class="eyebrow">Connection &amp; traffic</p><h1 id="network-heading">Network</h1></div></div>
+            <div class="settings-grid network-details-grid"><article class="panel metric-chart"><div class="panel-heading"><h2>Interface traffic</h2><span>60 seconds</span></div><div class="network-rate-pair"><div><small>↑ Transmit</small><strong id="detail-network-tx">—</strong></div><div><small>↓ Receive</small><strong id="detail-network-rx">—</strong></div></div><canvas id="network-detail-history" aria-label="Network transmit and receive throughput history"></canvas><p class="help">All interface traffic, not only SRT.</p></article><article class="panel"><h2>Active connection</h2><dl class="feature-list"><dt>Interface</dt><dd id="detail-network-interface">—</dd><dt>Address</dt><dd id="detail-network-address" data-fit>—</dd><dt>State</dt><dd id="detail-network-state">—</dd><dt>Kind</dt><dd id="detail-network-kind">—</dd><dt>Link speed</dt><dd id="detail-network-speed">—</dd><dt>Duplex</dt><dd id="detail-network-duplex">—</dd><dt>SRT receiver</dt><dd id="detail-network-receiver" data-fit>—</dd></dl><div class="safety-note"><h2>Connection safety</h2><p class="help" data-fit>Wi-Fi editing needs a verified independent management path.</p><button class="secondary" type="button" disabled>Wi-Fi setup unavailable</button></div></article></div>
+          </section>
+          <section id="diagnostics" class="page-section settings-page" data-page="diagnostics" hidden aria-labelledby="diagnostics-heading">
+            <div class="section-heading"><div><p class="eyebrow">Redacted runtime events</p><h1 id="diagnostics-heading">Diagnostics &amp; events</h1></div><div class="button-row"><button id="logs-export" type="button" class="secondary">Export filtered events</button><button id="refresh-button" type="button" class="secondary">Refresh</button></div></div>
+            <dl class="panel diagnostics-list"><div><dt>Media service</dt><dd id="diagnostic-media">Unavailable</dd></div><div><dt>Last error</dt><dd id="diagnostic-error" data-fit>None reported</dd></div><div><dt>Reconnect count</dt><dd id="diagnostic-reconnects">—</dd></div><div><dt>SRT statistics</dt><dd id="diagnostic-srt" data-fit>Unavailable</dd></div><div><dt>Network route</dt><dd id="diagnostic-route" data-fit>Unavailable</dd></div></dl>
+            <article id="warning-panel" class="panel warning-panel" hidden><h2>Attention needed</h2><ul id="warning-list"></ul></article>
+            <article class="panel log-panel"><div class="panel-heading"><h2>Recent events</h2><span id="logs-page" class="muted"></span></div><div class="log-filters"><label for="logs-filter">Filter</label><input id="logs-filter" type="search" placeholder="Code or message" maxlength="128"><label for="logs-level">Level</label><select id="logs-level"><option value="all">All levels</option><option value="info">Info</option><option value="warning">Warning</option><option value="error">Error</option></select></div><ol id="log-list" class="log-list" aria-live="polite"><li>No events reported.</li></ol><div class="log-pagination"><span class="muted">Latest 32 reported events · not the system journal</span><button id="logs-previous" class="secondary" type="button" aria-label="Previous events">←</button><button id="logs-next" class="secondary" type="button" aria-label="Next events">→</button></div></article>
+          </section>
+          <section id="settings" class="page-section settings-page" data-page="settings" hidden aria-labelledby="settings-heading">
+            <div class="section-heading"><div><p class="eyebrow">Admin console</p><h1 id="settings-heading">Settings</h1></div><div class="theme-control"><label for="display-theme">Console theme</label><select id="display-theme"><option value="dark">Midnight</option><option value="light">Daylight</option></select></div></div>
+            <div class="settings-grid"><article class="panel maintenance-panel"><h2>Apply &amp; maintenance</h2><p id="maintenance-state" class="settings-note" data-fit role="status">Checking maintenance availability…</p><dl class="feature-list"><dt>Saved configuration</dt><dd id="settings-config-state" data-fit>—</dd><dt>Active revision</dt><dd id="settings-active-revision" data-fit>—</dd><dt>Saved revision</dt><dd id="settings-saved-revision" data-fit>—</dd></dl><button type="button" class="secondary" data-maintenance="media.restart"><svg class="icon" aria-hidden="true"><use href="#icon-restart"/></svg>Apply saved settings / restart media</button><div class="button-row"><button type="button" class="secondary" data-maintenance="system.reboot"><svg class="icon" aria-hidden="true"><use href="#icon-restart"/></svg>Reboot device</button><button type="button" class="danger" data-maintenance="system.shutdown"><svg class="icon" aria-hidden="true"><use href="#icon-power"/></svg>Shut down</button></div><p class="help" data-fit>Recording is finalized and stopped before maintenance.</p><p class="help" data-fit>Only saved startup settings resume after restart; recording stays stopped.</p><p class="help" data-fit>Every maintenance command requires your current web password.</p></article><form id="password-form" class="panel"><h2>Change web password</h2><p class="settings-note">Changing this password signs out every web session.</p><div class="field"><label for="account-current-password">Current password</label><input id="account-current-password" type="password" autocomplete="current-password" required maxlength="1024"></div><div class="field"><label for="account-new-password">New password</label><input id="account-new-password" type="password" autocomplete="new-password" required minlength="12" maxlength="1024"></div><div class="field"><label for="account-confirm-password">Confirm new password</label><input id="account-confirm-password" type="password" autocomplete="new-password" required minlength="12" maxlength="1024"></div><button type="submit">Change password &amp; sign out</button><p id="account-message" class="help" data-fit role="status">At least 12 characters. This does not change your SSH password.</p></form></div>
+          </section>
+          <section id="about" class="page-section settings-page" data-page="about" hidden aria-labelledby="about-heading">
+            <div class="section-heading"><div><p class="eyebrow">Audio-to-SRT relay</p><h1 id="about-heading">About TinyPiRelay</h1></div></div>
+            <div class="settings-grid"><article class="panel"><svg class="about-logo" aria-hidden="true"><use href="#logo-mark"/></svg><h2>One capture. Independent outputs.</h2><p class="settings-note">Live monitoring, SRT streaming, and local FLAC recording.</p><dl class="feature-list"><dt>Installed version</dt><dd id="about-version">—</dd><dt>Architecture</dt><dd id="about-architecture">—</dd><dt>Capture devices</dt><dd id="about-devices">—</dd><dt>Approved representations</dt><dd id="about-representations">—</dd></dl><p class="help">TinyPiRelay is independent; its logo is original artwork.</p></article><article class="panel"><h2>Reported capabilities</h2><dl id="about-capabilities" class="feature-list"></dl><div class="safety-note"><h2>What the numbers mean</h2><p class="help" data-fit>Only measured values are displayed; unavailable sensors stay —.</p><p class="help" data-fit>Storage time remaining is an estimate from recent recording growth.</p><p class="help" data-fit>Hardware validation applies to the tested rig and configuration.</p><p class="help" data-fit>FLAC recovery keeps the original; recovered audio may contain gaps.</p></div></article></div>
+          </section>
+        </div>
+
+        <div id="config-save-bar" class="save-bar panel" hidden><p id="config-state" class="muted" data-fit aria-live="polite">Configuration not loaded</p><button id="save-config" type="submit" form="config-form">Save configuration</button></div>
+        <footer class="app-footer"><span>TinyPiRelay · live admin console</span><span>— = UNAVAILABLE MEASUREMENT</span></footer>
+      </div>
+    </div>
+  </main>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-heading" aria-describedby="confirm-message confirm-details">
+    <form method="dialog">
+      <p class="eyebrow">TinyPiRelay · confirmation</p>
+      <h2 id="confirm-heading">Confirm action</h2>
+      <p id="confirm-message" data-fit></p>
+      <div id="confirm-details" hidden></div>
+      <div id="confirm-password-field" class="field" hidden><label for="confirm-current-password">Current web password</label><input id="confirm-current-password" type="password" autocomplete="current-password" maxlength="1024" disabled></div>
+      <div class="dialog-actions"><button class="secondary" value="cancel" formnovalidate autofocus>Cancel</button><button value="confirm">Confirm</button></div>
+    </form>
+  </dialog>
+  <section id="maintenance-overlay" class="maintenance-overlay" hidden aria-live="polite" aria-labelledby="maintenance-heading"><div class="panel"><svg class="icon reconnect-icon" aria-hidden="true"><use href="#icon-restart"/></svg><p class="eyebrow">TinyPiRelay · maintenance</p><h1 id="maintenance-heading">Pending reconnect</h1><p id="maintenance-progress" data-fit>Waiting for the device…</p><p class="help" data-fit>Do not disconnect power while recordings are being finalized.</p><button id="maintenance-retry" type="button" class="secondary">Check connection</button></div></section>
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "evidence_context": {
+    "recorded_at_utc": "2026-08-18T13:30:16Z",
+    "host": "TinyPiRelay",
+    "os_release": "Raspbian GNU/Linux 13 (trixie)",
+    "kernel": "6.18.34+rpt-rpi-v6",
+    "architecture": "armv6l",
+    "userland_bits": 32,
+    "dpkg_architecture": "armhf",
+    "board_model": "Raspberry Pi Zero W Rev 1.1"
+  },
+  "tool_versions": {
+    "gst-launch-1.0": "1.26.2",
+    "ffplay": "7.1.5-0+deb13u1",
+    "cvlc": null
+  },
+  "element_versions": {
+    "alsasrc": "1.26.2",
+    "audiotestsrc": "1.26.2",
+    "audioconvert": "1.26.2",
+    "audioresample": "1.26.2",
+    "capsfilter": "1.26.2",
+    "matroskamux": "1.26.2",
+    "srtsink": "1.26.2",
+    "srtsrc": "1.26.2",
+    "matroskademux": "1.26.2",
+    "queue": "1.26.2",
+    "fakesink": "1.26.2",
+    "flacenc": "1.26.2",
+    "flacparse": "1.26.2",
+    "flacdec": "1.26.2",
+    "opusenc": "1.26.2",
+    "opusparse": "1.26.2",
+    "opusdec": "1.26.2"
+  },
+  "declared_capabilities": [
+    "pcm_s16le_48000_stereo_matroska",
+    "flac_48000_stereo_matroska",
+    "opus_128k_48000_stereo_matroska"
+  ],
+  "representations": [
+    {
+      "id": "pcm_s16le_48000_stereo_matroska",
+      "description": "48 kHz stereo PCM S16LE in streamable Matroska over SRT",
+      "source_audio": {
+        "media_type": "audio/x-raw",
+        "format": "S16LE",
+        "layout": "interleaved",
+        "rate_hz": 48000,
+        "channels": 2
+      },
+      "codec": {
+        "name": "pcm_s16le",
+        "encoder_element": null,
+        "parser_element": null,
+        "bitrate_bps": null
+      },
+      "framing": {
+        "container": "matroska",
+        "muxer_element": "matroskamux",
+        "streamable": true
+      },
+      "transport": {
+        "protocol": "srt",
+        "sender_mode": "caller",
+        "receiver_mode": "listener",
+        "host": "127.0.0.1",
+        "port": 9101,
+        "gstreamer_latency_ms": 200,
+        "ffmpeg_latency_us": 200000
+      },
+      "required_elements": {
+        "sender_synthetic": [
+          "audiotestsrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "matroskamux",
+          "srtsink"
+        ],
+        "sender_alsa": [
+          "alsasrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "matroskamux",
+          "srtsink"
+        ],
+        "gstreamer_receiver": [
+          "srtsrc",
+          "matroskademux",
+          "queue",
+          "capsfilter",
+          "fakesink"
+        ]
+      },
+      "sender": {
+        "required": true,
+        "availability": "available",
+        "applicability": "applicable",
+        "synthetic_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "audiotestsrc",
+          "is-live=true",
+          "wave=sine",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9101?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "alsa_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "alsasrc",
+          "device=<ALSA_DEVICE>",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9101?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "result": {
+          "status": "pass",
+          "tested_at_utc": "2026-08-18T12:37:34Z",
+          "tool_version": "gst-launch-1.0 1.26.2",
+          "notes": "Both synthetic and physical-Pi ALSA iMM-6C sender runs passed. The device captured native mono S16LE 48000 Hz and audioconvert changed channel count only to stereo S16LE 48000 Hz. Scope was about 5 seconds. Each LAN sender emitted two non-fatal gst_buffer_list_foreach critical assertions, with no bus error or observed data loss. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+        }
+      },
+      "receivers": {
+        "gstreamer": {
+          "required": true,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://:9101?mode=listener&latency=200",
+          "argv": [
+            "gst-launch-1.0",
+            "-v",
+            "srtsrc",
+            "uri=srt://:9101?mode=listener&latency=200",
+            "!",
+            "matroskademux",
+            "!",
+            "queue",
+            "!",
+            "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+            "!",
+            "fakesink",
+            "sync=false"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T12:37:34Z",
+            "tool_version": "GStreamer 1.26.2",
+            "notes": "Required GStreamer receiver decoded the short physical-Pi run with buffer progress and no bus error or observed data loss. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        },
+        "ffplay": {
+          "required": false,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://0.0.0.0:9101?mode=listener&latency=200000",
+          "argv": [
+            "ffplay",
+            "-hide_banner",
+            "-loglevel",
+            "info",
+            "-nodisp",
+            "-autoexit",
+            "srt://0.0.0.0:9101?mode=listener&latency=200000"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T12:55:19Z",
+            "tool_version": "ffplay 7.1.5-0+deb13u1 (linux/amd64 Docker)",
+            "notes": "An existing cached linux/amd64 Docker image on the Windows receiver decoded the LAN stream, exited 0, and reported about 4.7 seconds of PCM output. Short-run scope only. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        },
+        "vlc": {
+          "required": false,
+          "availability": "unavailable",
+          "applicability": "applicable",
+          "uri": "srt://@:9101?mode=listener",
+          "argv": [
+            "cvlc",
+            "--play-and-exit",
+            "--no-video",
+            "srt://@:9101?mode=listener"
+          ],
+          "result": {
+            "status": "unavailable",
+            "tested_at_utc": null,
+            "tool_version": null,
+            "notes": "VLC/cvlc was absent on both the physical Pi and Windows receiver, so no VLC interoperability claim is made. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        }
+      }
+    },
+    {
+      "id": "flac_48000_stereo_matroska",
+      "description": "48 kHz stereo FLAC in streamable Matroska over SRT",
+      "source_audio": {
+        "media_type": "audio/x-raw",
+        "format": "S16LE",
+        "layout": "interleaved",
+        "rate_hz": 48000,
+        "channels": 2
+      },
+      "codec": {
+        "name": "flac",
+        "encoder_element": "flacenc",
+        "parser_element": null,
+        "bitrate_bps": null
+      },
+      "framing": {
+        "container": "matroska",
+        "muxer_element": "matroskamux",
+        "streamable": true
+      },
+      "transport": {
+        "protocol": "srt",
+        "sender_mode": "caller",
+        "receiver_mode": "listener",
+        "host": "127.0.0.1",
+        "port": 9102,
+        "gstreamer_latency_ms": 200,
+        "ffmpeg_latency_us": 200000
+      },
+      "required_elements": {
+        "sender_synthetic": [
+          "audiotestsrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "flacenc",
+          "matroskamux",
+          "srtsink"
+        ],
+        "sender_alsa": [
+          "alsasrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "flacenc",
+          "matroskamux",
+          "srtsink"
+        ],
+        "gstreamer_receiver": [
+          "srtsrc",
+          "matroskademux",
+          "queue",
+          "flacparse",
+          "flacdec",
+          "capsfilter",
+          "fakesink"
+        ]
+      },
+      "sender": {
+        "required": true,
+        "availability": "available",
+        "applicability": "applicable",
+        "synthetic_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "audiotestsrc",
+          "is-live=true",
+          "wave=sine",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "flacenc",
+          "quality=5",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9102?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "alsa_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "alsasrc",
+          "device=<ALSA_DEVICE>",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "flacenc",
+          "quality=5",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9102?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "result": {
+          "status": "pass",
+          "tested_at_utc": "2026-08-18T12:38:32Z",
+          "tool_version": "gst-launch-1.0 1.26.2",
+          "notes": "Both synthetic and physical-Pi ALSA iMM-6C sender runs passed. The device captured native mono S16LE 48000 Hz and audioconvert changed channel count only to stereo S16LE 48000 Hz before FLAC encoding. Scope was about 5 seconds. Each LAN sender emitted two non-fatal gst_buffer_list_foreach critical assertions, with no bus error or observed data loss. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+        }
+      },
+      "receivers": {
+        "gstreamer": {
+          "required": true,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://:9102?mode=listener&latency=200",
+          "argv": [
+            "gst-launch-1.0",
+            "-v",
+            "srtsrc",
+            "uri=srt://:9102?mode=listener&latency=200",
+            "!",
+            "matroskademux",
+            "!",
+            "queue",
+            "!",
+            "flacparse",
+            "!",
+            "flacdec",
+            "!",
+            "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+            "!",
+            "fakesink",
+            "sync=false"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T12:38:32Z",
+            "tool_version": "GStreamer 1.26.2",
+            "notes": "Required GStreamer receiver decoded the short physical-Pi FLAC run with buffer progress and no bus error or observed data loss. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        },
+        "ffplay": {
+          "required": false,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://0.0.0.0:9102?mode=listener&latency=200000",
+          "argv": [
+            "ffplay",
+            "-hide_banner",
+            "-loglevel",
+            "info",
+            "-nodisp",
+            "-autoexit",
+            "srt://0.0.0.0:9102?mode=listener&latency=200000"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T13:30:16Z",
+            "tool_version": "ffplay 7.1.5-0+deb13u1 (linux/amd64 Docker)",
+            "notes": "An existing cached linux/amd64 Docker image on the Windows receiver decoded the exact canonical no-sender-parser LAN stream, reported 3.32 seconds of playback progress, and exited 0. Short-run scope only. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        },
+        "vlc": {
+          "required": false,
+          "availability": "unavailable",
+          "applicability": "applicable",
+          "uri": "srt://@:9102?mode=listener",
+          "argv": [
+            "cvlc",
+            "--play-and-exit",
+            "--no-video",
+            "srt://@:9102?mode=listener"
+          ],
+          "result": {
+            "status": "unavailable",
+            "tested_at_utc": null,
+            "tool_version": null,
+            "notes": "VLC/cvlc was absent on both the physical Pi and Windows receiver, so no VLC interoperability claim is made. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        }
+      }
+    },
+    {
+      "id": "opus_128k_48000_stereo_matroska",
+      "description": "48 kHz stereo Opus at 128 kbps in streamable Matroska over SRT",
+      "source_audio": {
+        "media_type": "audio/x-raw",
+        "format": "S16LE",
+        "layout": "interleaved",
+        "rate_hz": 48000,
+        "channels": 2
+      },
+      "codec": {
+        "name": "opus",
+        "encoder_element": "opusenc",
+        "parser_element": "opusparse",
+        "bitrate_bps": 128000
+      },
+      "framing": {
+        "container": "matroska",
+        "muxer_element": "matroskamux",
+        "streamable": true
+      },
+      "transport": {
+        "protocol": "srt",
+        "sender_mode": "caller",
+        "receiver_mode": "listener",
+        "host": "127.0.0.1",
+        "port": 9103,
+        "gstreamer_latency_ms": 200,
+        "ffmpeg_latency_us": 200000
+      },
+      "required_elements": {
+        "sender_synthetic": [
+          "audiotestsrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "opusenc",
+          "opusparse",
+          "matroskamux",
+          "srtsink"
+        ],
+        "sender_alsa": [
+          "alsasrc",
+          "audioconvert",
+          "audioresample",
+          "capsfilter",
+          "opusenc",
+          "opusparse",
+          "matroskamux",
+          "srtsink"
+        ],
+        "gstreamer_receiver": [
+          "srtsrc",
+          "matroskademux",
+          "queue",
+          "opusparse",
+          "opusdec",
+          "capsfilter",
+          "fakesink"
+        ]
+      },
+      "sender": {
+        "required": true,
+        "availability": "available",
+        "applicability": "applicable",
+        "synthetic_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "audiotestsrc",
+          "is-live=true",
+          "wave=sine",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "opusenc",
+          "bitrate=128000",
+          "!",
+          "opusparse",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9103?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "alsa_argv": [
+          "gst-launch-1.0",
+          "-e",
+          "-v",
+          "alsasrc",
+          "device=<ALSA_DEVICE>",
+          "!",
+          "audioconvert",
+          "!",
+          "audioresample",
+          "!",
+          "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+          "!",
+          "opusenc",
+          "bitrate=128000",
+          "!",
+          "opusparse",
+          "!",
+          "matroskamux",
+          "streamable=true",
+          "!",
+          "srtsink",
+          "uri=srt://127.0.0.1:9103?mode=caller&latency=200",
+          "wait-for-connection=true"
+        ],
+        "result": {
+          "status": "pass",
+          "tested_at_utc": "2026-08-18T12:39:25Z",
+          "tool_version": "gst-launch-1.0 1.26.2",
+          "notes": "Both synthetic and physical-Pi ALSA iMM-6C sender runs passed. The device captured native mono S16LE 48000 Hz and audioconvert changed channel count only to stereo S16LE 48000 Hz before Opus encoding. Scope was about 5 seconds. Each LAN sender emitted two non-fatal gst_buffer_list_foreach critical assertions, with no bus error or observed data loss. Runtime 128k->192k->64k->96k->128k mutation also passed with continuous receive. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json and evidence/opus_bitrate_mutation_rpi_zero_w_2026-08-18.json."
+        }
+      },
+      "receivers": {
+        "gstreamer": {
+          "required": true,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://:9103?mode=listener&latency=200",
+          "argv": [
+            "gst-launch-1.0",
+            "-v",
+            "srtsrc",
+            "uri=srt://:9103?mode=listener&latency=200",
+            "!",
+            "matroskademux",
+            "!",
+            "queue",
+            "!",
+            "opusparse",
+            "!",
+            "opusdec",
+            "!",
+            "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+            "!",
+            "fakesink",
+            "sync=false"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T12:39:25Z",
+            "tool_version": "GStreamer 1.26.2",
+            "notes": "Required GStreamer receiver decoded the short physical-Pi Opus run with buffer progress and no bus error or observed data loss. The separate runtime-mutation receiver counted 126 buffers with monotonic 20 ms PTS gaps. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json and evidence/opus_bitrate_mutation_rpi_zero_w_2026-08-18.json."
+          }
+        },
+        "ffplay": {
+          "required": false,
+          "availability": "available",
+          "applicability": "applicable",
+          "uri": "srt://0.0.0.0:9103?mode=listener&latency=200000",
+          "argv": [
+            "ffplay",
+            "-hide_banner",
+            "-loglevel",
+            "info",
+            "-nodisp",
+            "-autoexit",
+            "srt://0.0.0.0:9103?mode=listener&latency=200000"
+          ],
+          "result": {
+            "status": "pass",
+            "tested_at_utc": "2026-08-18T12:57:36Z",
+            "tool_version": "ffplay 7.1.5-0+deb13u1 (linux/amd64 Docker)",
+            "notes": "An existing cached linux/amd64 Docker image on the Windows receiver decoded the LAN Opus stream, exited 0, and reported about 4.7 seconds of PCM output. Short-run scope only. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        },
+        "vlc": {
+          "required": false,
+          "availability": "unavailable",
+          "applicability": "applicable",
+          "uri": "srt://@:9103?mode=listener",
+          "argv": [
+            "cvlc",
+            "--play-and-exit",
+            "--no-video",
+            "srt://@:9103?mode=listener"
+          ],
+          "result": {
+            "status": "unavailable",
+            "tested_at_utc": null,
+            "tool_version": null,
+            "notes": "VLC/cvlc was absent on both the physical Pi and Windows receiver, so no VLC interoperability claim is made. Evidence: evidence/live_media_rpi_zero_w_imm6c_2026-08-18.json."
+          }
+        }
+      }
+    }
+  ]
+}

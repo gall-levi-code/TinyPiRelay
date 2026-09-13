@@ -1,0 +1,49 @@
+{
+  "captured_at_utc": "2026-09-03T19:34:32Z",
+  "target": {
+    "board": "Raspberry Pi 4 Model B Rev 1.4",
+    "hostname": "tinypirelay-pi4",
+    "os": "Debian GNU/Linux 13 (trixie)",
+    "architecture": "aarch64",
+    "kernel": "Linux 6.18.34+rpt-rpi-v8"
+  },
+  "device": {
+    "usb_id": "1235:8211",
+    "label": "Focusrite Scarlett Solo (3rd Gen.)",
+    "alsa_hardware_id": "hw:CARD=USB,DEV=0",
+    "alsa_plugin_id": "plughw:CARD=USB,DEV=0",
+    "hardware_format": "S32_LE",
+    "meaningful_bits": 24,
+    "channels": 2,
+    "supported_rates_hz": [44100, 48000, 88200, 96000, 176400, 192000]
+  },
+  "validated_capture": {
+    "format": "S24_32LE",
+    "rate_hz": 48000,
+    "channels": 2,
+    "native": false,
+    "duration_seconds": 3,
+    "sink": "/dev/null",
+    "result": "pass",
+    "note": "ALSA plughw exposes the device's 24 meaningful bits in a FLAC-compatible 32-bit container; no audio file was retained."
+  },
+  "tinypirelay_runtime": {
+    "version": "0.5.3-dev",
+    "configuration_revision": "a5143f6e18eebbf6f499d9935ca2d5ebee71d16e5c7bbedb1b8a2104865a3fb3",
+    "capture_state": "running",
+    "meter_channels": 2,
+    "spectrum_bands": 512,
+    "recording": {
+      "start_result": "pass",
+      "stop_and_finalize_result": "pass",
+      "file_size_bytes": 2863892,
+      "gstreamer_flac_decode_result": "pass",
+      "gstreamer_version": "1.26.2",
+      "runtime_error": null
+    }
+  },
+  "streaming": {
+    "result": "not tested",
+    "approved_options": []
+  }
+}

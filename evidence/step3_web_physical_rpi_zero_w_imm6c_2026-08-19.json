@@ -1,0 +1,210 @@
+{
+  "configuration": {
+    "attached_control_socket": true,
+    "manage_attached_media": true,
+    "recording_decode_timeout_seconds": 30.0,
+    "recording_decode_tool": "gst-launch-1.0",
+    "slow_client_seconds": 12.0,
+    "sse_client_limit": 2
+  },
+  "evidence_classification": {
+    "claim_limit": "physical media claim requires operator-selected physical-hardware label",
+    "control_protocol": "real_unix_domain_socket",
+    "hardware_tested": true,
+    "label": "physical-hardware",
+    "media_participant": "attached_existing_media_service",
+    "web_service": "real_subprocess"
+  },
+  "process_evidence": {
+    "media_process_started_by_harness": false,
+    "real_local_control_socket": true,
+    "separate_media_process": true,
+    "web_process_was_killed": true,
+    "web_stderr_clean": true,
+    "web_stderr_issue_codes": [],
+    "web_subprocess_restarted": true,
+    "web_subprocess_started": true
+  },
+  "production_component": false,
+  "result": {
+    "checks": {
+      "authentication_throttle_session_csrf_logout": true,
+      "fault_states_are_visible_and_evidence_is_classified": true,
+      "media_unavailable_and_recovery_are_explicit": false,
+      "real_web_subprocess_and_control_socket": true,
+      "redaction_validation_and_non_cartesian_gate": true,
+      "slow_and_disconnected_sse_clients_are_bounded": true,
+      "web_failure_does_not_restart_media": true
+    },
+    "reasons": [
+      "media_unavailable_and_recovery_are_explicit"
+    ],
+    "status": "fail"
+  },
+  "scenarios": {
+    "attached_recording_finalization": {
+      "applicable": true,
+      "current_file": "/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac",
+      "decode": {
+        "attempted": true,
+        "command": [
+          "gst-launch-1.0",
+          "-q",
+          "filesrc",
+          "location=/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac",
+          "!",
+          "flacparse",
+          "!",
+          "flacdec",
+          "!",
+          "fakesink"
+        ],
+        "decode_to_eos": true,
+        "elapsed_seconds": 1.0811297000000195,
+        "exit_code": 0,
+        "result": "eos",
+        "stderr_tail": "",
+        "timed_out": false,
+        "timeout_seconds": 30.0,
+        "tool": "gst-launch-1.0"
+      },
+      "file_regular": true,
+      "file_size_bytes": 933821,
+      "finalized_file_matches_current_file": true,
+      "header": "fLaC",
+      "last_finalized_file": "/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac",
+      "media_duration_seconds": 36.29,
+      "mode": "attached_physical_finalized_flac_decode",
+      "recording_started_by_harness": true,
+      "recording_state_after_cleanup": "stopped",
+      "sample_rate_hz": 48000,
+      "sha256": "78284bf8a24120bb34bf457b976db7812db0c9f29d9fc2affbc74bf63c388b17",
+      "streaminfo_valid": true,
+      "total_samples": 1741920
+    },
+    "authentication": {
+      "csrf_rejection_code": "csrf_rejected",
+      "csrf_rejection_status": 403,
+      "established_session_status_after_throttle": 200,
+      "established_session_survived_throttle": true,
+      "login_status": 200,
+      "logout_response_unauthenticated": true,
+      "logout_status": 200,
+      "old_session_status_after_logout": 401,
+      "rotating_username_count": 6,
+      "second_login_status": 200,
+      "session_authenticated": true,
+      "session_status": 200,
+      "unauthorized_status": 401,
+      "wrong_login_statuses": [
+        401,
+        401,
+        401,
+        401,
+        401,
+        429
+      ]
+    },
+    "configuration_and_capabilities": {
+      "capability_status": 200,
+      "config_status": 200,
+      "known_simulator_secret_absent": true,
+      "malformed_setting_code": "invalid_configuration",
+      "malformed_setting_status": 400,
+      "non_cartesian_rejection_code": "invalid_configuration",
+      "non_cartesian_rejection_status": 400,
+      "passphrase_metadata_only": true,
+      "rejected_requests_left_config_unchanged": true,
+      "runtime_secret_probe_redacted": true,
+      "validation_requests_used_expected_revision": true
+    },
+    "fault_state_visibility": {
+      "classification": "attached_media_fault_injection_not_performed",
+      "performed": false,
+      "physical_fault_injection": "pending",
+      "states": {}
+    },
+    "media_unavailable_recovery": {
+      "media_generations_unchanged": true,
+      "media_states_remained_running": false,
+      "recovered_available": true,
+      "recovery_status": 200,
+      "unavailable_state_explicit": true,
+      "unavailable_status": 503
+    },
+    "sse_bounds": {
+      "bounded_numeric_telemetry": true,
+      "configured_client_limit": 2,
+      "disconnect_churn_attempts": 12,
+      "no_server_rendered_images": true,
+      "overload_status": 503,
+      "process_resources": {
+        "after": {
+          "fd_count": 6,
+          "rss_bytes": 20434944,
+          "supported": true
+        },
+        "baseline": {
+          "fd_count": 4,
+          "rss_bytes": 20258816,
+          "supported": true
+        },
+        "deltas": {
+          "fd_after": 2,
+          "fd_during": 4,
+          "rss_after_bytes": 176128,
+          "rss_during_bytes": 159744
+        },
+        "during": {
+          "fd_count": 8,
+          "rss_bytes": 20418560,
+          "supported": true
+        },
+        "limits": {
+          "fd_after": 2,
+          "fd_during": 6,
+          "rss_after_bytes": 8388608,
+          "rss_during_bytes": 16777216
+        }
+      },
+      "slot_recovered_after_disconnects": true,
+      "slow_clients_held_open": 2,
+      "slow_clients_unread_seconds": 12.088475159999689
+    },
+    "web_failure_isolation": {
+      "crash_lease_wait_seconds": 6.244784712999717,
+      "generations_unchanged": true,
+      "level_meter_present_after_lease_expiry": true,
+      "old_session_endpoint_status": 200,
+      "old_session_invalidated": true,
+      "post_restart_status": 200,
+      "recording_counter_increased_if_supported": true,
+      "recording_counter_sources": [
+        "current_file_st_size",
+        "current_file_st_size",
+        "current_file_st_size"
+      ],
+      "recording_counter_supported": true,
+      "recording_current_files": [
+        "/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac",
+        "/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac",
+        "/tmp/tinypirelay-step3-lan.6wtFii/recordings/tinypirelay-20260819T074130.902212Z.flac"
+      ],
+      "recording_current_files_absolute_regular": [
+        true,
+        true,
+        true
+      ],
+      "relogin_status": 200,
+      "spectrum_absent_after_lease_expiry": true,
+      "spectrum_present_before_web_crash": true,
+      "sse_numeric_spectrum_before_web_crash": true,
+      "states_running_throughout": true,
+      "stream_stat_counter_increased": true
+    }
+  },
+  "schema_version": 1,
+  "setup_errors": [],
+  "spike": "step3_web_control_boundary",
+  "step": 3
+}

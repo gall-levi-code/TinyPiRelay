@@ -1,0 +1,236 @@
+{
+  "configuration": {
+    "attached_control_socket": false,
+    "manage_attached_media": false,
+    "slow_client_seconds": 12.0,
+    "sse_client_limit": 2
+  },
+  "evidence_classification": {
+    "claim_limit": "control-plane behavior only; no physical audio or SRT media",
+    "control_protocol": "real_unix_domain_socket",
+    "hardware_tested": false,
+    "label": "simulated-control-plane",
+    "media_participant": "stateful_simulator_no_audio_or_network",
+    "web_service": "real_subprocess"
+  },
+  "process_evidence": {
+    "media_process_started_by_harness": true,
+    "real_local_control_socket": true,
+    "separate_media_process": true,
+    "web_process_was_killed": true,
+    "web_stderr_clean": true,
+    "web_stderr_issue_codes": [],
+    "web_subprocess_restarted": true,
+    "web_subprocess_started": true
+  },
+  "production_component": false,
+  "result": {
+    "checks": {
+      "authentication_throttle_session_csrf_logout": true,
+      "fault_states_are_visible_and_evidence_is_classified": true,
+      "media_unavailable_and_recovery_are_explicit": true,
+      "real_web_subprocess_and_control_socket": true,
+      "redaction_validation_and_non_cartesian_gate": true,
+      "slow_and_disconnected_sse_clients_are_bounded": true,
+      "web_failure_does_not_restart_media": true
+    },
+    "reasons": [],
+    "status": "pass"
+  },
+  "scenarios": {
+    "authentication": {
+      "csrf_rejection_code": "csrf_rejected",
+      "csrf_rejection_status": 403,
+      "established_session_status_after_throttle": 200,
+      "established_session_survived_throttle": true,
+      "login_status": 200,
+      "logout_response_unauthenticated": true,
+      "logout_status": 200,
+      "old_session_status_after_logout": 401,
+      "rotating_username_count": 6,
+      "second_login_status": 200,
+      "session_authenticated": true,
+      "session_status": 200,
+      "unauthorized_status": 401,
+      "wrong_login_statuses": [
+        401,
+        401,
+        401,
+        401,
+        401,
+        429
+      ]
+    },
+    "configuration_and_capabilities": {
+      "capability_status": 200,
+      "config_status": 200,
+      "known_simulator_secret_absent": true,
+      "malformed_setting_code": "invalid_configuration",
+      "malformed_setting_status": 400,
+      "non_cartesian_rejection_code": "invalid_configuration",
+      "non_cartesian_rejection_status": 400,
+      "passphrase_metadata_only": true,
+      "rejected_requests_left_config_unchanged": true,
+      "runtime_secret_probe_redacted": true,
+      "validation_requests_used_expected_revision": true
+    },
+    "fault_state_visibility": {
+      "classification": "controlled_simulator_injection_not_hardware",
+      "performed": true,
+      "physical_fault_injection": "pending",
+      "states": {
+        "capture_device_lost": {
+          "expected": {
+            "last_error": {
+              "code": "device_lost",
+              "message": "controlled simulated capture device loss"
+            },
+            "scope": "capture",
+            "state": "failed"
+          },
+          "http": {
+            "last_error": {
+              "code": "device_lost",
+              "message": "controlled simulated capture device loss"
+            },
+            "state": "failed"
+          },
+          "http_status": 200,
+          "sse": {
+            "last_error": {
+              "code": "device_lost",
+              "message": "controlled simulated capture device loss"
+            },
+            "state": "failed"
+          },
+          "sse_status": 200
+        },
+        "recording_blocked_storage": {
+          "expected": {
+            "last_error": null,
+            "scope": "recording",
+            "state": "blocked",
+            "warning": {
+              "code": "storage_unsafe",
+              "message": "controlled simulated recording storage hard stop"
+            }
+          },
+          "http": {
+            "last_error": null,
+            "state": "blocked",
+            "warning": {
+              "code": "storage_unsafe",
+              "message": "controlled simulated recording storage hard stop"
+            }
+          },
+          "http_status": 200,
+          "sse": {
+            "last_error": null,
+            "state": "blocked",
+            "warning": {
+              "code": "storage_unsafe",
+              "message": "controlled simulated recording storage hard stop"
+            }
+          },
+          "sse_status": 200
+        },
+        "srt_retry_wait": {
+          "expected": {
+            "last_error": {
+              "code": "srt_connection_failed",
+              "message": "controlled simulated SRT retry wait"
+            },
+            "next_retry_seconds": 2,
+            "scope": "connection",
+            "state": "retry_wait"
+          },
+          "http": {
+            "last_error": {
+              "code": "srt_connection_failed",
+              "message": "controlled simulated SRT retry wait"
+            },
+            "next_retry_seconds": 2,
+            "state": "retry_wait"
+          },
+          "http_status": 200,
+          "sse": {
+            "last_error": {
+              "code": "srt_connection_failed",
+              "message": "controlled simulated SRT retry wait"
+            },
+            "next_retry_seconds": 2,
+            "state": "retry_wait"
+          },
+          "sse_status": 200
+        }
+      }
+    },
+    "media_unavailable_recovery": {
+      "media_generations_unchanged": true,
+      "media_states_remained_running": true,
+      "recovered_available": true,
+      "recovery_status": 200,
+      "unavailable_state_explicit": true,
+      "unavailable_status": 503
+    },
+    "sse_bounds": {
+      "bounded_numeric_telemetry": true,
+      "configured_client_limit": 2,
+      "disconnect_churn_attempts": 12,
+      "no_server_rendered_images": true,
+      "overload_status": 503,
+      "process_resources": {
+        "after": {
+          "fd_count": 6,
+          "rss_bytes": 20459520,
+          "supported": true
+        },
+        "baseline": {
+          "fd_count": 4,
+          "rss_bytes": 20242432,
+          "supported": true
+        },
+        "deltas": {
+          "fd_after": 2,
+          "fd_during": 2,
+          "rss_after_bytes": 217088,
+          "rss_during_bytes": 196608
+        },
+        "during": {
+          "fd_count": 6,
+          "rss_bytes": 20439040,
+          "supported": true
+        },
+        "limits": {
+          "fd_after": 2,
+          "fd_during": 6,
+          "rss_after_bytes": 8388608,
+          "rss_during_bytes": 16777216
+        }
+      },
+      "slot_recovered_after_disconnects": true,
+      "slow_clients_held_open": 2,
+      "slow_clients_unread_seconds": 12.045201802000065
+    },
+    "web_failure_isolation": {
+      "crash_lease_wait_seconds": 6.080273615999886,
+      "generations_unchanged": true,
+      "level_meter_present_after_lease_expiry": true,
+      "old_session_endpoint_status": 200,
+      "old_session_invalidated": true,
+      "post_restart_status": 200,
+      "recording_counter_increased_if_supported": true,
+      "recording_counter_supported": true,
+      "relogin_status": 200,
+      "spectrum_absent_after_lease_expiry": true,
+      "spectrum_present_before_web_crash": true,
+      "sse_numeric_spectrum_before_web_crash": true,
+      "states_running_throughout": true,
+      "stream_stat_counter_increased": true
+    }
+  },
+  "schema_version": 1,
+  "setup_errors": [],
+  "spike": "step3_web_control_boundary",
+  "step": 3
+}

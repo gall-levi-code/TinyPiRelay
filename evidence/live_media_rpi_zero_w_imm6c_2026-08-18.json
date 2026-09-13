@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "publication_redaction": {
+    "date": "2026-09-13",
+    "changes": "Private workstation receiver address in command_catalog replaced with RFC 5737 documentation address 192.0.2.30; original artifact retained privately outside the repository.",
+    "byte_identical_to_original": false,
+    "notes": "docs/evidence/PUBLICATION_REDACTIONS.md"
+  },
+  "evidence_id": "rpi_zero_w_imm6c_step1_media_2026-08-18",
+  "recorded_at_utc": "2026-08-18T13:30:16Z",
+  "scope": "Finite Milestone 1 architecture-spike evidence; not a production media engine or endurance benchmark.",
+  "target": {
+    "hostname": "TinyPiRelay",
+    "board_model": "Raspberry Pi Zero W Rev 1.1",
+    "board_revision": "9000c1",
+    "architecture": "armv6l",
+    "userland_bits": 32,
+    "dpkg_architecture": "armhf",
+    "os_release": "Raspbian GNU/Linux 13 (trixie)",
+    "kernel": "6.18.34+rpt-rpi-v6",
+    "python": "3.13.5",
+    "ram_bytes": 447647744
+  },
+  "capture_device": {
+    "model": "Dayton Audio iMM-6C",
+    "usb_id": "0d8c:0147",
+    "alsa_id": "hw:CARD=iMM6C,DEV=0",
+    "capture_channels": 1,
+    "capture_formats": [
+      "S16_LE",
+      "S24_3LE"
+    ],
+    "gstreamer_formats_observed": [
+      "S16LE",
+      "S24LE"
+    ],
+    "capture_rates_hz": [
+      44100,
+      48000,
+      96000
+    ],
+    "stream_test_native_caps": "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1",
+    "stream_representation_caps": "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2",
+    "conversion_observed": "Channel conversion from native mono to stereo; sample rate and S16 format were unchanged."
+  },
+  "stack": {
+    "gstreamer": "1.26.2",
+    "pygobject": "3.50.0",
+    "srt_library": "libsrt-gnutls 1.5.4-1",
+    "srt_plugin": "1.26.2",
+    "ffplay_receiver": "7.1.5-0+deb13u1",
+    "ffplay_container_image": "ghcr.io/tphakala/birdnet-go:nightly",
+    "ffplay_container_image_id": "sha256:b6382049967374b49a62ada386a6551efc3806a56c77934cd1bdf300d5c55878",
+    "ffplay_container_platform": "linux/amd64",
+    "vlc": null,
+    "element_versions": {
+      "alsasrc": "1.26.2",
+      "audioconvert": "1.26.2",
+      "audioresample": "1.26.2",
+      "capsfilter": "1.26.2",
+      "tee": "1.26.2",
+      "queue": "1.26.2",
+      "level": "1.26.2",
+      "spectrum": "1.26.2",
+      "opusenc": "1.26.2",
+      "flacenc": "1.26.2",
+      "srtsink": "1.26.2",
+      "audiotestsrc": "1.26.2",
+      "matroskamux": "1.26.2",
+      "matroskademux": "1.26.2",
+      "srtsrc": "1.26.2",
+      "flacparse": "1.26.2",
+      "opusparse": "1.26.2",
+      "flacdec": "1.26.2",
+      "opusdec": "1.26.2",
+      "fakesink": "1.26.2",
+      "identity": "1.26.2"
+    }
+  },
+  "probe": {
+    "artifact": "evidence/probe_rpi_zero_w_imm6c_2026-08-18.json",
+    "sha256": "c1a04bc3cc44b78378cb94b3c5bd61dc3b16d03a0dba3e918f8528b3738acf04",
+    "status": "present",
+    "registry_policy": "GStreamer registry was created and used only in a validated mktemp directory under /tmp; GST_REGISTRY_UPDATE=no was used after the initial isolated scan.",
+    "user_registry_present_before": false
+  },
+  "command_catalog": {
+    "native_arecord_s16": "timeout 5s arecord -D hw:CARD=iMM6C,DEV=0 -f S16_LE -r 48000 -c 1 -d 1 -t raw /dev/null",
+    "native_arecord_s24": "timeout 5s arecord -D hw:CARD=iMM6C,DEV=0 -f S24_3LE -r 48000 -c 1 -d 1 -t raw /dev/null",
+    "native_gst_s16": "timeout 15s gst-launch-1.0 -e -v alsasrc device=hw:CARD=iMM6C,DEV=0 num-buffers=100 ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1' ! fakesink sync=false",
+    "native_gst_s24": "timeout 15s gst-launch-1.0 -e -v alsasrc device=hw:CARD=iMM6C,DEV=0 num-buffers=100 ! 'audio/x-raw,format=S24LE,layout=interleaved,rate=48000,channels=1' ! fakesink sync=false",
+    "gst_receiver_pcm": "GST_DEBUG='identity:6,srt*:4' timeout 20s gst-launch-1.0 -e -v srtsrc uri='srt://:9101?mode=listener&latency=200' ! matroskademux ! queue ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! identity name=received silent=false ! fakesink sync=false",
+    "gst_receiver_flac": "GST_DEBUG='identity:6,srt*:4' timeout 20s gst-launch-1.0 -e -v srtsrc uri='srt://:9102?mode=listener&latency=200' ! matroskademux ! queue ! flacparse ! flacdec ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! identity name=received silent=false ! fakesink sync=false",
+    "gst_receiver_opus": "GST_DEBUG='identity:6,srt*:4' timeout 20s gst-launch-1.0 -e -v srtsrc uri='srt://:9103?mode=listener&latency=200' ! matroskademux ! queue ! opusparse ! opusdec ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! identity name=received silent=false ! fakesink sync=false",
+    "gst_synthetic_pcm": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9101?mode=caller&latency=200' wait-for-connection=true",
+    "gst_synthetic_flac": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! flacenc quality=5 ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9102?mode=caller&latency=200' wait-for-connection=true",
+    "gst_synthetic_opus": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! opusenc bitrate=128000 ! opusparse ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9103?mode=caller&latency=200' wait-for-connection=true",
+    "gst_alsa_pcm": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v alsasrc device=hw:CARD=iMM6C,DEV=0 num-buffers=250 latency-time=20000 buffer-time=200000 ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1' ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9101?mode=caller&latency=200' wait-for-connection=true",
+    "gst_alsa_flac": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v alsasrc device=hw:CARD=iMM6C,DEV=0 num-buffers=250 latency-time=20000 buffer-time=200000 ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1' ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! flacenc quality=5 ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9102?mode=caller&latency=200' wait-for-connection=true",
+    "gst_alsa_opus": "GST_DEBUG='srt*:4' timeout 15s gst-launch-1.0 -e -v alsasrc device=hw:CARD=iMM6C,DEV=0 num-buffers=250 latency-time=20000 buffer-time=200000 ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1' ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! opusenc bitrate=128000 ! opusparse ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9103?mode=caller&latency=200' wait-for-connection=true",
+    "ffplay_pcm": "docker run --rm --name tinypirelay-m1-ffplay-pcm -p 9101:9101/udp -e SDL_AUDIODRIVER=dummy --entrypoint ffplay ghcr.io/tphakala/birdnet-go:nightly -hide_banner -loglevel info -nodisp -autoexit -volume 0 -stats 'srt://0.0.0.0:9101?mode=listener&latency=200000'",
+    "ffplay_flac": "docker run --rm --name tinypirelay-m1-ffplay-flac-canonical -p 9102:9102/udp -e SDL_AUDIODRIVER=dummy --entrypoint ffplay ghcr.io/tphakala/birdnet-go:nightly -hide_banner -loglevel info -stats -nodisp -autoexit -volume 0 'srt://0.0.0.0:9102?mode=listener&latency=200000'",
+    "ffplay_opus": "docker run --rm --name tinypirelay-m1-ffplay-opus -p 9103:9103/udp -e SDL_AUDIODRIVER=dummy --entrypoint ffplay ghcr.io/tphakala/birdnet-go:nightly -hide_banner -loglevel info -stats -nodisp -autoexit -volume 0 'srt://0.0.0.0:9103?mode=listener&latency=200000'",
+    "gst_lan_pcm": "timeout 15s gst-launch-1.0 -e audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! matroskamux streamable=true ! srtsink uri='srt://192.0.2.30:9101?mode=caller&latency=200' wait-for-connection=true",
+    "gst_lan_flac": "timeout 15s gst-launch-1.0 -e audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! flacenc quality=5 ! matroskamux streamable=true ! srtsink uri='srt://192.0.2.30:9102?mode=caller&latency=200' wait-for-connection=true",
+    "gst_lan_opus": "timeout 15s gst-launch-1.0 -e audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! opusenc bitrate=128000 ! opusparse ! matroskamux streamable=true ! srtsink uri='srt://192.0.2.30:9103?mode=caller&latency=200' wait-for-connection=true",
+    "queue_receiver": "timeout 30s gst-launch-1.0 -e -v srtsrc uri='srt://:9103?mode=listener&latency=200' wait-for-connection=true ! matroskademux ! queue ! opusparse ! opusdec ! audioconvert ! identity name=received silent=false ! fakesink sync=false",
+    "queue_sender": "GST_DEBUG='queue:6,identity:6,srt*:4' timeout 25s gst-launch-1.0 -e -v -m audiotestsrc is-live=true wave=sine num-buffers=250 samplesperbuffer=960 ! audioconvert ! audioresample ! 'audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=2' ! tee name=t t. ! queue name=stream ! opusenc bitrate=128000 ! opusparse ! matroskamux streamable=true ! srtsink uri='srt://127.0.0.1:9103?mode=caller&latency=200' wait-for-connection=true t. ! queue name=slow max-size-buffers=8 max-size-bytes=0 max-size-time=0 leaky=downstream ! identity name=slowprobe silent=false sleep-time=1000000 ! fakesink sync=false",
+    "opus_mutation": "python3 -B spikes/opus_bitrate_mutation.py --output evidence/opus_bitrate_mutation.json"
+  },
+  "native_capture_checks": [
+    {
+      "command": "native_arecord_s16",
+      "exit_code": 0,
+      "duration_seconds": 1,
+      "result": "pass"
+    },
+    {
+      "command": "native_arecord_s24",
+      "exit_code": 0,
+      "duration_seconds": 1,
+      "result": "pass"
+    },
+    {
+      "command": "native_gst_s16",
+      "exit_code": 0,
+      "duration_seconds": 2,
+      "negotiated_caps": "audio/x-raw,format=S16LE,layout=interleaved,rate=48000,channels=1",
+      "log_sha256": "6756eb00e63587132ff0b71f1cf567c255e6230501546f18d5cf30efd27e3fde",
+      "result": "pass"
+    },
+    {
+      "command": "native_gst_s24",
+      "exit_code": 0,
+      "duration_seconds": 2,
+      "alsa_container_format": "S24_3LE",
+      "negotiated_caps": "audio/x-raw,format=S24LE,layout=interleaved,rate=48000,channels=1",
+      "log_sha256": "27561cabda789b7f8cf550ea8728cbb5eb00f8a9704e57d8ac3f8448e3955f72",
+      "result": "pass"
+    }
+  ],
+  "gstreamer_loopback_runs": [
+    {
+      "representation_id": "pcm_s16le_48000_stereo_matroska",
+      "source": "synthetic",
+      "sender_command": "gst_synthetic_pcm",
+      "receiver_command": "gst_receiver_pcm",
+      "tested_at_utc": "2026-08-18T12:34:37Z",
+      "duration_seconds": 5,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 241,
+      "last_received_pts": "0:00:04.845000000",
+      "sender_log_sha256": "f38133f9cfce5d12e9c2a82cf72b062e76c7a2334ffa09806e20a568aebecc0d",
+      "receiver_log_sha256": "5d6c33c5ae3f22f8e5cf792a883ed8c5362272d4467ac0ec2b0fbcec287ebf42",
+      "result": "pass"
+    },
+    {
+      "representation_id": "flac_48000_stereo_matroska",
+      "source": "synthetic",
+      "sender_command": "gst_synthetic_flac",
+      "receiver_command": "gst_receiver_flac",
+      "tested_at_utc": "2026-08-18T12:35:38Z",
+      "duration_seconds": 5,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 51,
+      "last_received_pts": "0:00:04.830000000",
+      "sender_log_sha256": "37c62d06fe6dd765ac689a1bf202c621da838554473996ad6995efa6f14b5927",
+      "receiver_log_sha256": "ce783aecd3f2235dda8144a600e4bd9e958a605460b65a7132e9e265a5108054",
+      "result": "pass"
+    },
+    {
+      "representation_id": "opus_128k_48000_stereo_matroska",
+      "source": "synthetic",
+      "sender_command": "gst_synthetic_opus",
+      "receiver_command": "gst_receiver_opus",
+      "tested_at_utc": "2026-08-18T12:36:20Z",
+      "duration_seconds": 6,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 241,
+      "last_received_pts": "0:00:04.833500000",
+      "sender_log_sha256": "86daa3b0e0c1209e8b46b1627a2e74dbff7f6f3609025e532b644735d8c9eb2e",
+      "receiver_log_sha256": "ce6c1aee6ce5bfeaab19ad26a9068511f782327e0901ced839628469c971f58e",
+      "result": "pass"
+    },
+    {
+      "representation_id": "pcm_s16le_48000_stereo_matroska",
+      "source": "alsa",
+      "sender_command": "gst_alsa_pcm",
+      "receiver_command": "gst_receiver_pcm",
+      "tested_at_utc": "2026-08-18T12:37:34Z",
+      "duration_seconds": 6,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 241,
+      "last_received_pts": "0:00:04.800000000",
+      "sender_log_sha256": "d942d183548eb1c1c3c2d7445b89012541e9dfe53b125c38417d13d903c4b1d4",
+      "receiver_log_sha256": "683a7cd6f9e2c674bd38ba625795a7360e30d23638c12d68d249cd44022bd4ad",
+      "result": "pass"
+    },
+    {
+      "representation_id": "flac_48000_stereo_matroska",
+      "source": "alsa",
+      "sender_command": "gst_alsa_flac",
+      "receiver_command": "gst_receiver_flac",
+      "tested_at_utc": "2026-08-18T12:38:32Z",
+      "duration_seconds": 6,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 51,
+      "last_received_pts": "0:00:04.800000000",
+      "sender_log_sha256": "0cbeb1ba376ab435c3724bad930c61ec9f070497c3f0394f75d2abb1d6f7a2c7",
+      "receiver_log_sha256": "760631a6aaa8856d0562b59c6ebf4119b54fd551ffe1d47007ffb0131e344e8f",
+      "result": "pass"
+    },
+    {
+      "representation_id": "opus_128k_48000_stereo_matroska",
+      "source": "alsa",
+      "sender_command": "gst_alsa_opus",
+      "receiver_command": "gst_receiver_opus",
+      "tested_at_utc": "2026-08-18T12:39:25Z",
+      "duration_seconds": 6,
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "received_buffers": 241,
+      "last_received_pts": "0:00:04.793500000",
+      "sender_log_sha256": "62e3a2a5bc84c8957b8275dd00a09f92ea6e4a530758c37079b6faa7c088742c",
+      "receiver_log_sha256": "b98731342164109a94dcffa524713aef4aad96ba445863847bbf0ac1642e7d6b",
+      "result": "pass"
+    }
+  ],
+  "ffplay_interoperability_runs": [
+    {
+      "representation_id": "pcm_s16le_48000_stereo_matroska",
+      "sender_command": "gst_lan_pcm",
+      "receiver_command": "ffplay_pcm",
+      "tested_at_utc": "2026-08-18T12:55:19Z",
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "receiver_playback_progress_seconds": 4.77,
+      "sender_log_sha256": "be622a350d34c895bb5e919fdb06c1e96395bea5bf99f5ca5f5b89ec696c7738",
+      "result": "pass"
+    },
+    {
+      "representation_id": "flac_48000_stereo_matroska",
+      "sender_command": "gst_lan_flac",
+      "receiver_command": "ffplay_flac",
+      "tested_at_utc": "2026-08-18T13:30:16Z",
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "receiver_playback_progress_seconds": 3.32,
+      "sender_parser_element": null,
+      "sender_log_sha256": "2707ed04f7a37a7f74c80b3ed0b7b42ddeb5e943508615b51a4956e626f6668a",
+      "result": "pass"
+    },
+    {
+      "representation_id": "opus_128k_48000_stereo_matroska",
+      "sender_command": "gst_lan_opus",
+      "receiver_command": "ffplay_opus",
+      "tested_at_utc": "2026-08-18T12:57:36Z",
+      "sender_exit_code": 0,
+      "receiver_exit_code": 0,
+      "receiver_playback_progress_seconds": 4.74,
+      "sender_log_sha256": "a22617f21b2078ec6f4cdd62fa200f91e6e427cda2d4d6fce4cf88b65d852059",
+      "result": "pass"
+    }
+  ],
+  "vlc_interoperability": {
+    "availability": "unavailable",
+    "result": "unavailable",
+    "reason": "VLC/cvlc was absent on the Pi and development host; no package was installed."
+  },
+  "queue_isolation": {
+    "tested_at_utc": "2026-08-18T12:50:47Z",
+    "sender_command": "queue_sender",
+    "receiver_command": "queue_receiver",
+    "duration_seconds": 15,
+    "duration_basis": "wall",
+    "stream_content_seconds": 5.0435,
+    "sender_exit_code": 0,
+    "receiver_exit_code": 0,
+    "stream_receiver_handoffs": 251,
+    "slow_branch_handoffs": 13,
+    "slow_identity_sleep_microseconds": 1000000,
+    "slow_queue_max_buffers": 8,
+    "slow_queue_leaky": "downstream",
+    "last_stream_pts": "0:00:05.043500000",
+    "sender_log_sha256": "eb6896fe1740eebef679942e42bb3cf8c2954d3307ecc330bff8d2be483dd5d9",
+    "receiver_log_sha256": "104343f7df66bda5b15764f199a04ce3c45a3585a2f483805f38fd38f7ca6229",
+    "result": "pass",
+    "interpretation": "Over about 15 seconds of wall time while the slow branch drained, the one-second-per-buffer disposable branch handled 13 buffers while the independently queued stream branch delivered all 251 decoded buffers representing about 5 seconds of stream content."
+  },
+  "opus_runtime_mutation": {
+    "command": "opus_mutation",
+    "artifact": "evidence/opus_bitrate_mutation_rpi_zero_w_2026-08-18.json",
+    "sha256": "9167ba9f24ca770fea23d43927547191d83f2ad2060f1d816fd2a070562e2ca2",
+    "bitrate_sequence_bps": [
+      128000,
+      192000,
+      64000,
+      96000,
+      128000
+    ],
+    "duration_seconds": 4.744405,
+    "received_buffers": 126,
+    "max_pts_gap_ms": 20,
+    "bus_errors": 0,
+    "unexpected_eos": 0,
+    "result": "pass"
+  },
+  "resources": {
+    "post_test_observed_at_utc": "2026-08-18T13:03:24Z",
+    "temperature_c": 36.9,
+    "throttled": "0x0",
+    "memory_available_bytes": 322027520,
+    "swap_used_bytes": 5206016,
+    "packet_loss": "not measured",
+    "reconnect": "not tested"
+  },
+  "final_flac_interop_observation": {
+    "observed_at_utc": "2026-08-18T13:32:19Z",
+    "temperature_c": 35.8,
+    "throttled": "0x0",
+    "temporary_registry_and_log_removed": true,
+    "user_registry_present_after": false
+  },
+  "warnings_and_limitations": [
+    "Every finite GStreamer listener logged one SRT socket warning when the caller intentionally closed; the receivers still exited 0 after EOS.",
+    "Each LAN sender and the queue/mutation sender emitted two non-fatal gst_buffer_list_foreach critical assertions in GStreamer 1.26.2; no bus error, nonzero exit, missing decoded stream, or PTS discontinuity was observed.",
+    "FFplay ran in a cached linux/amd64 container with dummy audio on the Windows receiver; this proves receiver decoding, not audible output quality.",
+    "The runs were approximately five seconds. Endurance, interruption recovery, SRT reconnect, packet loss, recording, simultaneous monitoring, and production lifecycle behavior remain untested.",
+    "The iMM-6C is natively mono. These exact candidate representations were tested after mono-to-stereo channel conversion and must not be described as native stereo capture.",
+    "The private receiver address is retained only inside the exact executed LAN commands; no credential, SSID, or MAC address is retained."
+  ]
+}
